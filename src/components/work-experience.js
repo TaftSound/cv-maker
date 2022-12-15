@@ -34,25 +34,18 @@ class PastJob extends Component {
       <div className="job-component">
         <h2>Work Experience</h2>
         <form>
-        {/* Job Title */}
         <label htmlFor="title">Job Title: </label>
         <input type="text" id="title" value={title} onChange={this.onChange}/>
-        {/* Employer */}
         <label htmlFor="employer">Employer: </label>
         <input type="text" id="employer" value={employer} onChange={this.onChange}/>
-        {/* City/town */}
         <label htmlFor="city">City: </label>
         <input type="text" id="city" value={city} onChange={this.onChange}/>
-        {/* Start date */}
         <label htmlFor="startDate">Start Date: </label>
         <input type="text" id="startDate" value={startDate} onChange={this.onChange}/>
-        {/* End date */}
         <label htmlFor="endDate">End Date: </label>
         <input type="text" id="endDate" value={endDate} onChange={this.onChange}/>
-        {/* Description */}
         <label htmlFor="description">Description: </label>
         <input type="text" id="description" value={description} onChange={this.onChange}/>
-        {/* Save/edit button */}
         {/* Delete button */}
         {/* Reorder button */}
       {/* Add new job button */}
@@ -61,6 +54,31 @@ class PastJob extends Component {
     )
   }
 
+  renderSaved () {
+    const { title, employer, city, startDate, endDate, description } = this.state
+    return (
+      <div className="job-component">
+        <h2>Work Experience</h2>
+        <h3>{title}</h3>
+        <p>{employer}</p>
+        <p>{city}</p>
+        <p>{startDate} - {endDate}</p>
+        <p>{description}</p>
+      </div>
+    )
+  }
+
+  changeSaveState () {
+    if (this.state.isSaved) {
+      this.setState({
+        isSaved: false
+      })  
+    } else {
+      this.setState({
+        isSaved: true
+      })
+    }
+  }
 
   render () {
     if (this.state.isSaved) {
