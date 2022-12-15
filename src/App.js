@@ -2,6 +2,7 @@ import './App.css';
 import { Component } from 'react';
 import PersonalInfo from './components/personal-info';
 import ResumeObjective from './components/resume-objective';
+import WorkExperience from './components/work-experience';
 
 class App extends Component {
   constructor (props) {
@@ -44,6 +45,7 @@ class App extends Component {
       <div className='App'>
       <PersonalInfo />
       <ResumeObjective />
+      <WorkExperience />
       {/* GENERAL INFO SECTION */}
       
       {/* Section header */}
