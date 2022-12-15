@@ -1,0 +1,11 @@
+.section {
+  padding: 15px;
+  background-color: white;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+button {
+  align-self: flex-end;
+}

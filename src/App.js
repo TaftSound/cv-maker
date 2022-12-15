@@ -1,5 +1,7 @@
 import './App.css';
 import { Component } from 'react';
+import PersonalInfo from './components/personal-info';
+import GenericSection from './components/generic-section';
 
 class App extends Component {
   constructor (props) {
@@ -39,7 +41,9 @@ class App extends Component {
         // Delete button enabled via boolean props
         // Reorder button enabled via boolean props
       
-      <div>
+      <div className='App'>
+      {/* <PersonalInfo /> */}
+      <GenericSection />
       {/* GENERAL INFO SECTION */}
       
       {/* Section header */}
