@@ -1,7 +1,7 @@
 import './App.css';
 import { Component } from 'react';
 import PersonalInfo from './components/personal-info';
-import GenericSection from './components/generic-section';
+import ResumeObjective from './components/resume-objective';
 
 class App extends Component {
   constructor (props) {
@@ -43,6 +43,7 @@ class App extends Component {
       
       <div className='App'>
       <PersonalInfo />
+      <ResumeObjective />
       {/* GENERAL INFO SECTION */}
       
       {/* Section header */}
