@@ -42,8 +42,7 @@ class App extends Component {
         // Reorder button enabled via boolean props
       
       <div className='App'>
-      {/* <PersonalInfo /> */}
-      <GenericSection />
+      <PersonalInfo />
       {/* GENERAL INFO SECTION */}
       
       {/* Section header */}
