@@ -25,8 +25,7 @@ class ResumeObjective extends Component {
       <div className="section-content">
         <h2>Resume Objective</h2>
         <form>
-          <label htmlFor="objective">Resume Objective: </label>
-          <input type="text-area" id="objective" value={objective} onChange={this.updateObjective}/>
+          <textarea id="objective" aria-label="resume objective" value={objective} onChange={this.updateObjective}/>
         </form>
       </div>
     )
@@ -42,8 +41,32 @@ class ResumeObjective extends Component {
     )
   }
 
+  changeSaveState () {
+    if (this.state.isSaved) {
+      this.setState({
+        isSaved: false
+      })  
+    } else {
+      this.setState({
+        isSaved: true
+      })
+    }
+  }
 
   render () {
+    if (this.state.isSaved) {
+      return (
+        <GenericSection content={this.renderSaved()} 
+                        isSaved={this.state.isSaved} 
+                        changeSaveState={this.changeSaveState} />
+      )
+    } else {
+      return (
+        <GenericSection content={this.renderForm()} 
+                        isSaved={this.state.isSaved} 
+                        changeSaveState={this.changeSaveState} />
+      )
+    }
   }
 }
 
