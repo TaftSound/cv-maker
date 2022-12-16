@@ -30,6 +30,24 @@ class SaveButton extends Component {
   }
 }
 
+class DeleteButton extends Component {
+  constructor (props) {
+    super (props)
+
+    this.state = {}
+  }
+
+  render () {
+    if (!this.props.deleteFunction) {
+      return
+    } else {
+      return (
+        <button onClick={this.props.deleteFunction}>X</button>
+      )
+    }
+  }
+}
+
 class GenericSection extends Component {
   constructor (props) {
     super (props)
@@ -39,6 +57,7 @@ class GenericSection extends Component {
     const { content, isSaved, changeSaveState } = this.props
     return (
       <div className="section">
+        <DeleteButton deleteFunction={this.props.deleteFunction}/>
         {content}
         <SaveButton isSaved={isSaved} changeSaveState={changeSaveState} />
       </div>

@@ -47,7 +47,6 @@ class PastJob extends Component {
         <input type="text" id="description" value={description} onChange={this.onChange}/>
         {/* Delete button */}
         {/* Reorder button */}
-      {/* Add new job button */}
         </form>
       </div>
     )
@@ -81,15 +80,21 @@ class PastJob extends Component {
   render () {
     if (this.state.isSaved) {
       return (
-        <GenericSection content={this.renderSaved()}
-                        isSaved={this.state.isSaved}
-                        changeSaveState={this.changeSaveState} />
+        <li>
+          <GenericSection content={this.renderSaved()}
+                          isSaved={this.state.isSaved}
+                          changeSaveState={this.changeSaveState}
+                          deleteFunction={this.props.deleteFunction} />
+        </li>
       )
     } else {
       return (
-        <GenericSection content={this.renderForm()}
-                        isSaved={this.state.isSaved}
-                        changeSaveState={this.changeSaveState} />
+        <li>
+          <GenericSection content={this.renderForm()}
+                          isSaved={this.state.isSaved}
+                          changeSaveState={this.changeSaveState}
+                          deleteFunction={this.props.deleteFunction} />
+        </li>
       )
     }
   }
@@ -103,35 +108,36 @@ class WorkExperience extends Component {
     this.deleteJob = this.deleteJob.bind(this)
 
     this.state = {
-      jobs: [(
-        <li key={uniqid()} >
-          <PastJob />
-        </li>
-      )]
+      jobs: [<PastJob deleteFunction={() => { this.deleteJob('startKey123') }} key={'startKey123'} />]
     }
   }
 
   addJob () {
     const { jobs } = this.state
+    const key = uniqid()
     jobs.push(
-      <li key={uniqid()} >
-        <PastJob />
-      </li>
+      <PastJob deleteFunction={() => { this.deleteJob(key) }} key={key} />
     )
     this.setState({
       jobs: jobs
     })
   }
 
-  deleteJob () {
-
+  deleteJob (key) {
+    const { jobs } = this.state
+    const updatedJobs = jobs.filter((job) => {
+      if (job.key === key) { return false }
+      return true
+    })
+    this.setState({ jobs: updatedJobs })
   }
 
   render () {
+    const { jobs } = this.state
     return (
       <div className="section">
         <h2>Work Experience</h2>
-        <ul>{this.state.jobs}</ul>
+        <ul>{jobs}</ul>
         <button className="new-job-button" onClick={this.addJob}>+</button>
       </div>
     )
