@@ -8,8 +8,8 @@ import "../styles/generic-section.css"
       // It should include:
         // Container div with styling applied - done
         // Save/edit button -- function via props
-        // Delete button enabled via boolean props
-        // Reorder button enabled via boolean props
+        // Delete button enabled via props
+        // Reorder button enabled via props
 
 class SaveButton extends Component {
   constructor (props) {
@@ -48,6 +48,28 @@ class DeleteButton extends Component {
   }
 }
 
+class PositionButtons extends Component {
+  constructor (props) {
+    super (props)
+
+    this.state = {}
+  }
+
+  render () {
+    const { positionFunction } = this.props
+    if (!positionFunction) {
+      return
+    } else {
+      return (
+        <div className="position-buttons">
+          <button onClick={() => { positionFunction(true) }}>Up</button>
+          <button onClick={() => { positionFunction(false) }}>Down</button>
+        </div>
+      )
+    }
+  }
+}
+
 class GenericSection extends Component {
   constructor (props) {
     super (props)
@@ -57,7 +79,10 @@ class GenericSection extends Component {
     const { content, isSaved, changeSaveState } = this.props
     return (
       <div className="section">
-        <DeleteButton deleteFunction={this.props.deleteFunction}/>
+        <div className="button-div">
+          <PositionButtons positionFunction={this.props.positionFunction}/>
+          <DeleteButton deleteFunction={this.props.deleteFunction}/>
+        </div>
         {content}
         <SaveButton isSaved={isSaved} changeSaveState={changeSaveState} />
       </div>

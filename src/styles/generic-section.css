@@ -13,6 +13,11 @@
 button {
   align-self: flex-end;
 }
+.button-div {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
 ul {
   padding: 0px;
   display: flex;

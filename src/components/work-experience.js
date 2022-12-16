@@ -45,7 +45,6 @@ class PastJob extends Component {
         <input type="text" id="endDate" value={endDate} onChange={this.onChange}/>
         <label htmlFor="description">Description: </label>
         <input type="text" id="description" value={description} onChange={this.onChange}/>
-        {/* Delete button */}
         {/* Reorder button */}
         </form>
       </div>
@@ -84,7 +83,8 @@ class PastJob extends Component {
           <GenericSection content={this.renderSaved()}
                           isSaved={this.state.isSaved}
                           changeSaveState={this.changeSaveState}
-                          deleteFunction={this.props.deleteFunction} />
+                          deleteFunction={this.props.deleteFunction}
+                          positionFunction={this.props.positionFunction} />
         </li>
       )
     } else {
@@ -93,7 +93,8 @@ class PastJob extends Component {
           <GenericSection content={this.renderForm()}
                           isSaved={this.state.isSaved}
                           changeSaveState={this.changeSaveState}
-                          deleteFunction={this.props.deleteFunction} />
+                          deleteFunction={this.props.deleteFunction}
+                          positionFunction={this.props.positionFunction} />
         </li>
       )
     }
@@ -106,9 +107,13 @@ class WorkExperience extends Component {
     
     this.addJob = this.addJob.bind(this)
     this.deleteJob = this.deleteJob.bind(this)
+    this.shiftJob = this.shiftJob.bind(this)
 
     this.state = {
-      jobs: [<PastJob deleteFunction={() => { this.deleteJob('startKey123') }} key={'startKey123'} />]
+      jobs: [<PastJob 
+              deleteFunction={() => { this.deleteJob('startKey123') }}
+              positionFunction={(isMoveUp) => { this.shiftJob(isMoveUp, 'startKey123') }}
+              key={'startKey123'} />]
     }
   }
 
@@ -116,7 +121,10 @@ class WorkExperience extends Component {
     const { jobs } = this.state
     const key = uniqid()
     jobs.push(
-      <PastJob deleteFunction={() => { this.deleteJob(key) }} key={key} />
+      <PastJob 
+      deleteFunction={() => { this.deleteJob(key) }}
+      positionFunction={(isMoveUp) => { this.shiftJob(isMoveUp, key) }}
+      key={key} />
     )
     this.setState({
       jobs: jobs
@@ -130,6 +138,26 @@ class WorkExperience extends Component {
       return true
     })
     this.setState({ jobs: updatedJobs })
+  }
+
+  shiftJob (isMoveUp, key) {
+    const { jobs } = this.state
+    if (jobs.length < 2) { return }
+    let index
+    for (let job in jobs) {
+      if (jobs[job].key === key) {
+        index = +job
+        break
+      }
+    }
+    let newIndex = index + 1
+    if (isMoveUp) { newIndex = index - 1 }
+    if (newIndex < 0 || newIndex === jobs.length) { return }
+    const clickedItem = jobs[index]
+    const shiftedItem = jobs[newIndex]
+    jobs.splice(newIndex, 1, clickedItem)
+    jobs.splice(index, 1, shiftedItem)
+    this.setState({ jobs: jobs })
   }
 
   render () {
