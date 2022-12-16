@@ -4,6 +4,7 @@ import PersonalInfo from './components/personal-info';
 import ResumeObjective from './components/resume-objective';
 import WorkExperience from './components/work-experience';
 import Education from './components/educational-experience';
+import Skills from './components/skills';
 
 class App extends Component {
   constructor (props) {
@@ -15,17 +16,6 @@ class App extends Component {
   
   render () {
     return (
-      // Each input should switch to a <p> element when 
-      // section is saved
-
-      // Each section should have a save button
-      // When pressed, save button becomes an edit button
-
-      // Each section displayed as a floating card
-      
-      // Consider either sidescrolling from one section to next
-      // like in an image carousel, or having one long page 
-      // with all sections displayed
 
       // When all sections have been saved,
       // there should be an option to output/display
@@ -34,75 +24,27 @@ class App extends Component {
       // For future consider adding varied templates
 
       // Consider saving data to local storage
-
-      // Make a generic section component
-      // All others can extend this component
-      // It should include:
-        // Container div with styling applied
-        // Save/edit button -- function via props
-        // Delete button enabled via boolean props
-        // Reorder button enabled via boolean props
       
       <div className='App'>
       <PersonalInfo />
       <ResumeObjective />
       <WorkExperience />
       <Education />
-      {/* GENERAL INFO SECTION */}
+      <Skills />
       
-      {/* Section header */}
-      {/* first name + last name input */}
-      {/* email input */}
-      {/* phone input */}
-      {/* address input */}
-      {/* zip code */}
-      {/* city */}
-      {/* save/edit button */}
-
-      {/*  */}
-
-      {/* RESUME OBJECTIVE */}
-      
-      {/* Section header */}
-      {/* Objective */}
-      {/* Save/edit button */}
-
-      {/*  */}
-
-      {/* WORK EXPERIENCE */}
+      {/* SKILLS */}
 
       {/* Section header */}
-      {/* For each job: */}
-        {/* Job Title */}
-        {/* Employer */}
-        {/* City/town */}
-        {/* Start date */}
-        {/* End date */}
-        {/* Description */}
+      {/* For each: */}
+        {/* The skill */}
+        {/* Skill level selector */}
         {/* Save/edit button */}
         {/* Delete button */}
         {/* Reorder button */}
-      {/* Add new job button */}
+      {/* Add new skill button */}
 
       {/*  */}
 
-      {/* EDUCATION/QUALIFICATIONS */}
-
-      {/* Section header */}
-      {/* For each school: */}
-        {/* Degree */}
-        {/* City */}
-        {/* School */}
-        {/* Start date */}
-        {/* End date */}
-        {/* Description */}
-        {/* Save/edit button */}
-        {/* Delete button */}
-        {/* Reorder button */}
-      {/* Add new school button */}
-
-      {/*  */}
-      
       {/* INTERESTS */}
 
       {/* Section header */}
@@ -130,21 +72,6 @@ class App extends Component {
         {/* Delete button */}
         {/* Reorder button */}
       {/* Add new reference button */}
-
-      {/*  */}
-      
-      {/* SKILLS */}
-
-      {/* Section header */}
-      {/* For each: */}
-        {/* The skill */}
-        {/* Skill level selector */}
-        {/* Save/edit button */}
-        {/* Delete button */}
-        {/* Reorder button */}
-      {/* Add new skill button */}
-
-
 
       </div>
     )
