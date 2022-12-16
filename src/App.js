@@ -3,6 +3,7 @@ import { Component } from 'react';
 import PersonalInfo from './components/personal-info';
 import ResumeObjective from './components/resume-objective';
 import WorkExperience from './components/work-experience';
+import EducationComponent from './components/educational-experience';
 
 class App extends Component {
   constructor (props) {
@@ -46,6 +47,7 @@ class App extends Component {
       <PersonalInfo />
       <ResumeObjective />
       <WorkExperience />
+      <EducationComponent />
       {/* GENERAL INFO SECTION */}
       
       {/* Section header */}
