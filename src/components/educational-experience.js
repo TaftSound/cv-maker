@@ -1,7 +1,7 @@
 import { Component } from "react";
 import MultiSection from "./generic-multisection";
 
-class EducationComponent extends Component {
+class Education extends Component {
   constructor (props) {
     super (props)
 
@@ -43,8 +43,7 @@ class EducationComponent extends Component {
         <h3>{newThis.state.degree}</h3>
         <p>{newThis.state.city}</p>
         <p>{newThis.state.school}</p>
-        <p>{newThis.state.start}</p>
-        <p>{newThis.state.end}</p>
+        <p>{newThis.state.start} - {newThis.state.end}</p>
       </div>
     )
   }
@@ -60,4 +59,4 @@ class EducationComponent extends Component {
   }
 }
 
-export default EducationComponent
+export default Education

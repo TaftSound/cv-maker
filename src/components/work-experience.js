@@ -1,173 +1,64 @@
 import { Component } from "react";
-import GenericSection from "./generic-section";
-import uniqid from "uniqid"
+import MultiSection from "./generic-multisection";
 
-class PastJob extends Component {
+class WorkExperience extends Component {
   constructor (props) {
     super (props)
 
-    this.renderForm = this.renderForm.bind(this)
-    this.renderSaved = this.renderSaved.bind(this)
-    this.changeSaveState = this.changeSaveState.bind(this)
-    this.onChange = this.onChange.bind(this)
-
-    this.state = {
-      isSaved: false,
-      title: '',
-      employer: '',
-      city: '',
-      startDate: '',
-      endDate: '',
-      description: '',
-    }
+    this.renderFormState = this.renderFormState.bind(this)
+    this.renderSavedState = this.renderSavedState.bind(this)
   }
 
-  onChange (event) {
-    const fieldName = event.target.id
-    const value = event.target.value
-    this.setState({ [fieldName]: value })
+  stateObject = {
+    isSaved: false,
+    title: '',
+    employer: '',
+    city: '',
+    startDate: '',
+    endDate: '',
+    description: '',
   }
 
-  renderForm () {
-    const { title, employer, city, startDate, endDate, description } = this.state
+  renderFormState (newThis, changeFunction) {
     return (
-      <div className="job-component">
+      <div>
         <form>
-        <label htmlFor="title">Job Title: </label>
-        <input type="text" id="title" value={title} onChange={this.onChange}/>
-        <label htmlFor="employer">Employer: </label>
-        <input type="text" id="employer" value={employer} onChange={this.onChange}/>
-        <label htmlFor="city">City: </label>
-        <input type="text" id="city" value={city} onChange={this.onChange}/>
-        <label htmlFor="startDate">Start Date: </label>
-        <input type="text" id="startDate" value={startDate} onChange={this.onChange}/>
-        <label htmlFor="endDate">End Date: </label>
-        <input type="text" id="endDate" value={endDate} onChange={this.onChange}/>
-        <label htmlFor="description">Description: </label>
-        <input type="text" id="description" value={description} onChange={this.onChange}/>
-        {/* Reorder button */}
+          <label htmlFor="title">Job Title: </label>
+          <input type="text" id="title" value={newThis.state.title} onChange={changeFunction}/>
+          <label htmlFor="employer">Employer: </label>
+          <input type="text" id="employer" value={newThis.state.employer} onChange={changeFunction}/>
+          <label htmlFor="city">City: </label>
+          <input type="text" id="city" value={newThis.state.city} onChange={changeFunction}/>
+          <label htmlFor="startDate">Start Date: </label>
+          <input type="text" id="startDate" value={newThis.state.startDate} onChange={changeFunction}/>
+          <label htmlFor="endDate">End Date: </label>
+          <input type="text" id="endDate" value={newThis.state.endDate} onChange={changeFunction}/>
+          <label htmlFor="description">Description: </label>
+          <input type="text" id="description" value={newThis.state.description} onChange={changeFunction}/>     
         </form>
       </div>
     )
   }
 
-  renderSaved () {
-    const { title, employer, city, startDate, endDate, description } = this.state
+  renderSavedState (newThis) {
     return (
-      <div className="job-component">
-        <h3>{title}</h3>
-        <p>{employer}</p>
-        <p>{city}</p>
-        <p>{startDate} - {endDate}</p>
-        <p>{description}</p>
+      <div>
+        <h3>{newThis.state.title}</h3>
+        <p>{newThis.state.employer}</p>
+        <p>{newThis.state.city}</p>
+        <p>{newThis.state.startDate} - {newThis.state.endDate}</p>
+        <p>{newThis.state.description}</p>   
       </div>
     )
   }
 
-  changeSaveState () {
-    if (this.state.isSaved) {
-      this.setState({
-        isSaved: false
-      })  
-    } else {
-      this.setState({
-        isSaved: true
-      })
-    }
-  }
-
   render () {
-    if (this.state.isSaved) {
-      return (
-        <li>
-          <GenericSection content={this.renderSaved()}
-                          isSaved={this.state.isSaved}
-                          changeSaveState={this.changeSaveState}
-                          deleteFunction={this.props.deleteFunction}
-                          positionFunction={this.props.positionFunction} />
-        </li>
-      )
-    } else {
-      return (
-        <li>
-          <GenericSection content={this.renderForm()}
-                          isSaved={this.state.isSaved}
-                          changeSaveState={this.changeSaveState}
-                          deleteFunction={this.props.deleteFunction}
-                          positionFunction={this.props.positionFunction} />
-        </li>
-      )
-    }
-  }
-}
-
-class WorkExperience extends Component {
-  constructor (props) {
-    super (props)
-    
-    this.addJob = this.addJob.bind(this)
-    this.deleteJob = this.deleteJob.bind(this)
-    this.shiftJob = this.shiftJob.bind(this)
-
-    this.state = {
-      jobs: [<PastJob 
-              deleteFunction={() => { this.deleteJob('startKey123') }}
-              positionFunction={(isMoveUp) => { this.shiftJob(isMoveUp, 'startKey123') }}
-              key={'startKey123'} />]
-    }
-  }
-
-  addJob () {
-    const { jobs } = this.state
-    const key = uniqid()
-    jobs.push(
-      <PastJob 
-      deleteFunction={() => { this.deleteJob(key) }}
-      positionFunction={(isMoveUp) => { this.shiftJob(isMoveUp, key) }}
-      key={key} />
-    )
-    this.setState({
-      jobs: jobs
-    })
-  }
-
-  deleteJob (key) {
-    const { jobs } = this.state
-    const updatedJobs = jobs.filter((job) => {
-      if (job.key === key) { return false }
-      return true
-    })
-    this.setState({ jobs: updatedJobs })
-  }
-
-  shiftJob (isMoveUp, key) {
-    const { jobs } = this.state
-    if (jobs.length < 2) { return }
-    let index
-    for (let job in jobs) {
-      if (jobs[job].key === key) {
-        index = +job
-        break
-      }
-    }
-    let newIndex = index + 1
-    if (isMoveUp) { newIndex = index - 1 }
-    if (newIndex < 0 || newIndex === jobs.length) { return }
-    const clickedItem = jobs[index]
-    const shiftedItem = jobs[newIndex]
-    jobs.splice(newIndex, 1, clickedItem)
-    jobs.splice(index, 1, shiftedItem)
-    this.setState({ jobs: jobs })
-  }
-
-  render () {
-    const { jobs } = this.state
     return (
-      <div className="section">
-        <h2>Work Experience</h2>
-        <ul>{jobs}</ul>
-        <button className="new-job-button" onClick={this.addJob}>+</button>
-      </div>
+      <MultiSection
+      sectionTitle='Work Experience: '
+      stateObject={this.stateObject}
+      renderFormState={this.renderFormState}
+      renderSavedState={this.renderSavedState} />
     )
   }
 }
