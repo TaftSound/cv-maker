@@ -1,6 +1,6 @@
 import { Component } from "react";
 import GenericSection from "./generic-section";
-
+import uniqid from "uniqid"
 
 class PastJob extends Component {
   constructor (props) {
@@ -32,7 +32,6 @@ class PastJob extends Component {
     const { title, employer, city, startDate, endDate, description } = this.state
     return (
       <div className="job-component">
-        <h2>Work Experience</h2>
         <form>
         <label htmlFor="title">Job Title: </label>
         <input type="text" id="title" value={title} onChange={this.onChange}/>
@@ -58,7 +57,6 @@ class PastJob extends Component {
     const { title, employer, city, startDate, endDate, description } = this.state
     return (
       <div className="job-component">
-        <h2>Work Experience</h2>
         <h3>{title}</h3>
         <p>{employer}</p>
         <p>{city}</p>
@@ -83,14 +81,14 @@ class PastJob extends Component {
   render () {
     if (this.state.isSaved) {
       return (
-        <GenericSection content={this.renderSaved()} 
-                        isSaved={this.state.isSaved} 
+        <GenericSection content={this.renderSaved()}
+                        isSaved={this.state.isSaved}
                         changeSaveState={this.changeSaveState} />
       )
     } else {
       return (
-        <GenericSection content={this.renderForm()} 
-                        isSaved={this.state.isSaved} 
+        <GenericSection content={this.renderForm()}
+                        isSaved={this.state.isSaved}
                         changeSaveState={this.changeSaveState} />
       )
     }
@@ -100,14 +98,41 @@ class PastJob extends Component {
 class WorkExperience extends Component {
   constructor (props) {
     super (props)
+    
+    this.addJob = this.addJob.bind(this)
+    this.deleteJob = this.deleteJob.bind(this)
 
-    this.state = {}
+    this.state = {
+      jobs: [(
+        <li key={uniqid()} >
+          <PastJob />
+        </li>
+      )]
+    }
+  }
+
+  addJob () {
+    const { jobs } = this.state
+    jobs.push(
+      <li key={uniqid()} >
+        <PastJob />
+      </li>
+    )
+    this.setState({
+      jobs: jobs
+    })
+  }
+
+  deleteJob () {
+
   }
 
   render () {
     return (
-      <div className="section-container">
-        <PastJob />
+      <div className="section">
+        <h2>Work Experience</h2>
+        <ul>{this.state.jobs}</ul>
+        <button className="new-job-button" onClick={this.addJob}>+</button>
       </div>
     )
   }
