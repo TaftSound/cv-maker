@@ -22,7 +22,7 @@ class Skills extends Component {
           <label htmlFor="skill">Skill: </label>
           <input type="text" id="skill" value={newThis.state.skill} onChange={changeFunction}/>
           <label htmlFor="yearsExperience">Years Of Experience: </label>
-          <input type="select" id="yearsExperience" value={newThis.state.yearsExperience} onChange={changeFunction}/>
+          <input type="text" id="yearsExperience" value={newThis.state.yearsExperience} onChange={changeFunction}/>
         </form>
       </div>
     )
