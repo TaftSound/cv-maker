@@ -11,7 +11,7 @@ class ResumeObjective extends Component {
 
     this.state = {
       isSaved: false,
-      objective: ''
+      objective: '',
     }
   }
 
@@ -22,22 +22,16 @@ class ResumeObjective extends Component {
   renderForm () {
     const { objective } = this.state
     return (
-      <div className="section-content">
-        <h2>Resume Objective</h2>
         <form>
           <textarea id="objective" aria-label="resume objective" value={objective} onChange={this.updateObjective}/>
         </form>
-      </div>
     )
   }
 
   renderSaved () {
     const { objective } = this.state
     return (
-      <div className="section-content">
-        <h2>Resume Objective</h2>
         <p>{objective}</p>
-      </div>
     )
   }
 
@@ -56,13 +50,15 @@ class ResumeObjective extends Component {
   render () {
     if (this.state.isSaved) {
       return (
-        <GenericSection content={this.renderSaved()} 
+        <GenericSection content={this.renderSaved()}
+                        sectionTitle={'Resume Objective'}
                         isSaved={this.state.isSaved} 
                         changeSaveState={this.changeSaveState} />
       )
     } else {
       return (
-        <GenericSection content={this.renderForm()} 
+        <GenericSection content={this.renderForm()}
+                        sectionTitle={'Resume Objective'}
                         isSaved={this.state.isSaved} 
                         changeSaveState={this.changeSaveState} />
       )

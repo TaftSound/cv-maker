@@ -72,6 +72,7 @@ class MultiSection extends Component {
     this.addItem = this.addItem.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
     this.shiftItem = this.shiftItem.bind(this)
+    this.collapseExpand = this.collapseExpand.bind(this)
 
     this.state = {
       items: [<Item 
@@ -80,7 +81,8 @@ class MultiSection extends Component {
               renderSavedState={this.props.renderSavedState}
               deleteFunction={() => { this.deleteItem('startKey123') }}
               positionFunction={(isMoveUp) => { this.shiftItem(isMoveUp, 'startKey123') }}
-              key={'startKey123'} />]
+              key={'startKey123'} />],
+      isExpanded: false,
     }
   }
 
@@ -130,15 +132,31 @@ class MultiSection extends Component {
     this.setState({ items: items })
   }
 
+  collapseExpand () {
+    if (this.state.isExpanded) {
+      this.setState({ isExpanded: false, })
+    } else {
+      this.setState({ isExpanded: true, })
+    }
+  }
+
   render () {
     const { items } = this.state
-    return (
-      <div className="section">
-        <h2>{this.props.sectionTitle}</h2>
-        <ul>{items}</ul>
-        <button className="new-job-button" onClick={this.addItem}>+</button>
-      </div>
-    )
+    if (this.state.isExpanded) {
+      return (
+        <div className="section">
+          <h2 onClick={this.collapseExpand}>{this.props.sectionTitle}</h2>
+          <ul>{items}</ul>
+          <button className="new-job-button" onClick={this.addItem}>+</button>
+        </div>
+      )
+    } else {
+      return (
+        <div className="section">
+          <h2 onClick={this.collapseExpand}>{this.props.sectionTitle}</h2>
+        </div>
+      )
+    }
   }
 }
 

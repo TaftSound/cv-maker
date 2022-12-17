@@ -48,7 +48,6 @@ class PersonalInfo extends Component {
     const { firstName, lastName, email, phone, address, zip, city } = this.state
     return (
       <div className="section-content">
-        <h2>Personal Info</h2>
         <form>
         {/* first name + last name input */}
         <label htmlFor="first-name">First Name: </label>
@@ -81,7 +80,6 @@ class PersonalInfo extends Component {
     const { firstName, lastName, email, phone, address, zip, city } = this.state
     return (
       <div className="section-content">
-        <h2>Personal Info</h2>
         <h3>{firstName + " " + lastName}</h3>
         <h4>{email}</h4>
         <h4>{phone}</h4>
@@ -108,13 +106,15 @@ class PersonalInfo extends Component {
   render () {
     if (this.state.isSaved) {
       return (
-        <GenericSection content={this.renderSaved()} 
+        <GenericSection content={this.renderSaved()}
+                        sectionTitle={'Personal Info'}
                         isSaved={this.state.isSaved} 
                         changeSaveState={this.changeSaveState} />
       )
     } else {
       return (
-        <GenericSection content={this.renderForm()} 
+        <GenericSection content={this.renderForm()}
+                        sectionTitle={'Personal Info'}
                         isSaved={this.state.isSaved} 
                         changeSaveState={this.changeSaveState} />
       )

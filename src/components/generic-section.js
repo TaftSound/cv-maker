@@ -74,20 +74,43 @@ class PositionButtons extends Component {
 class GenericSection extends Component {
   constructor (props) {
     super (props)
+
+    this.collapseExpand = this.collapseExpand.bind(this)
+
+    this.state = { isExpanded: false }
+  }
+
+  collapseExpand () {
+    if (this.state.isExpanded) {
+      this.setState({ isExpanded: false, })
+    } else {
+      this.setState({ isExpanded: true, })
+    }
   }
 
   render () {
-    const { content, isSaved, changeSaveState } = this.props
-    return (
-      <div className="section">
-        <div className="button-div">
-          <PositionButtons positionFunction={this.props.positionFunction}/>
-          <DeleteButton deleteFunction={this.props.deleteFunction}/>
+    const { content, sectionTitle, isSaved, changeSaveState } = this.props
+    let header
+    if (sectionTitle) { header = <h2 onClick={this.collapseExpand}>{sectionTitle}</h2> }
+    if (this.state.isExpanded) {
+      return (
+        <div className="section">
+          <div className="button-div">
+            <PositionButtons positionFunction={this.props.positionFunction}/>
+            <DeleteButton deleteFunction={this.props.deleteFunction}/>
+          </div>
+          {header}
+          {content}
+          <SaveButton isSaved={isSaved} changeSaveState={changeSaveState} />
         </div>
-        {content}
-        <SaveButton isSaved={isSaved} changeSaveState={changeSaveState} />
-      </div>
-    )
+      )
+    } else {
+      return (
+        <div className="section">
+          {header}
+        </div>
+      )
+    }
   }
 }
 

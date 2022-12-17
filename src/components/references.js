@@ -28,9 +28,6 @@ class References extends Component {
       this.setState({ includeReferences: true })
     }
   }
-      // {/* Section header */}
-      // {/* button to optionally say: */}
-      // {/* "references available upon request" */}
 
   renderFormState (newThis, changeFunction) {
     return (

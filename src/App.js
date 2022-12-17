@@ -28,20 +28,13 @@ class App extends Component {
       // Consider saving data to local storage
       
       <div className='App'>
-      <PersonalInfo />
-      <ResumeObjective />
-      <WorkExperience />
-      <Education />
-      <Skills />
-      <Interests />
-      <References />
-      
-      {/* REFERENCES */}
-
-      {/* Section header */}
-      {/* button to optionally say: */}
-      {/* "references available upon request" */}
-
+        <PersonalInfo />
+        <ResumeObjective />
+        <WorkExperience />
+        <Education />
+        <Skills />
+        <Interests />
+        <References />
       </div>
     )
   }
