@@ -5,6 +5,7 @@ import ResumeObjective from './components/resume-objective';
 import WorkExperience from './components/work-experience';
 import Education from './components/educational-experience';
 import Skills from './components/skills';
+import Interests from './components/interests';
 
 class App extends Component {
   constructor (props) {
@@ -31,19 +32,7 @@ class App extends Component {
       <WorkExperience />
       <Education />
       <Skills />
-      
-      {/* SKILLS */}
-
-      {/* Section header */}
-      {/* For each: */}
-        {/* The skill */}
-        {/* Skill level selector */}
-        {/* Save/edit button */}
-        {/* Delete button */}
-        {/* Reorder button */}
-      {/* Add new skill button */}
-
-      {/*  */}
+      <Interests />
 
       {/* INTERESTS */}
 
