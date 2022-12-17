@@ -6,6 +6,7 @@ import WorkExperience from './components/work-experience';
 import Education from './components/educational-experience';
 import Skills from './components/skills';
 import Interests from './components/interests';
+import References from './components/references';
 
 class App extends Component {
   constructor (props) {
@@ -33,34 +34,13 @@ class App extends Component {
       <Education />
       <Skills />
       <Interests />
-
-      {/* INTERESTS */}
-
-      {/* Section header */}
-      {/* For each: */}
-        {/* The interest */}
-        {/* Save/edit button */}
-        {/* Delete button */}
-        {/* Reorder button */}
-      {/* Add new interest button */}
-
-      {/*  */}
+      <References />
       
       {/* REFERENCES */}
 
       {/* Section header */}
       {/* button to optionally say: */}
       {/* "references available upon request" */}
-
-      {/* For each: */}
-        {/* company name */}
-        {/* person name */}
-        {/* phone number (optional) */}
-        {/* email address (optional) */}
-        {/* Save/edit button */}
-        {/* Delete button */}
-        {/* Reorder button */}
-      {/* Add new reference button */}
 
       </div>
     )

@@ -22,6 +22,7 @@ class SaveButton extends Component {
 
   render () {
     const { isSaved, changeSaveState } = this.props
+    if (!changeSaveState) { return }
     if (isSaved) {
       return <button onClick={changeSaveState}>Edit</button>
     } else {
