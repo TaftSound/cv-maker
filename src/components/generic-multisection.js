@@ -1,6 +1,6 @@
 import { Component } from "react";
 import GenericSection from "./generic-section";
-import uniqid from "uniqid"
+import uniqid from "uniqid";
 
 class Item extends Component {
   constructor (props) {
@@ -82,7 +82,7 @@ class MultiSection extends Component {
               deleteFunction={() => { this.deleteItem('startKey123') }}
               positionFunction={(isMoveUp) => { this.shiftItem(isMoveUp, 'startKey123') }}
               key={'startKey123'} />],
-      isExpanded: false,
+              isExpanded: true,
     }
   }
 
@@ -144,7 +144,7 @@ class MultiSection extends Component {
     const { items } = this.state
     if (this.state.isExpanded) {
       return (
-        <div className="section">
+        <div className="multi-section">
           <h2 onClick={this.collapseExpand}>{this.props.sectionTitle}</h2>
           <ul>{items}</ul>
           <button className="new-job-button" onClick={this.addItem}>+</button>

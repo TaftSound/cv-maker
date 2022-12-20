@@ -49,28 +49,42 @@ class PersonalInfo extends Component {
     return (
       <div className="section-content">
         <form>
-        {/* first name + last name input */}
-        <label htmlFor="first-name">First Name: </label>
-        <input type="text" id="first-name" value={firstName} onChange={this.updateFirstName}/>
+          {/* first name + last name input */}
+          <div className="input-container full" >
+            <label htmlFor="first-name">First Name*</label>
+            <input type="text" id="first-name" value={firstName} onChange={this.updateFirstName} />
+          </div>
 
-        <label htmlFor="last-name">Last Name: </label>
-        <input type="text" id="last-name" value={lastName} onChange={this.updateLastName}/>
-        {/* email input */}
-        <label htmlFor="email">Email: </label>
-        <input type="email" id="email" value={email} onChange={this.updateEmail}/>
-        {/* phone input */}
-        <label htmlFor="phone">Phone: </label>
-        <input type="text" id="phone" value={phone} onChange={this.updatePhone}/>
-        {/* address input */}
-        <label htmlFor="address">Address: </label>
-        <input type="text" id="address" value={address} onChange={this.updateAddress}/>
-        {/* zip code */}
-        <label htmlFor="zip">ZIP Code: </label>
-        <input type="text" id="zip" value={zip} onChange={this.updateZip}/>
-        {/* city */}
-        <label htmlFor="city">City: </label>
-        <input type="text" id="city" value={city} onChange={this.updateCity}/>
-        {/* save/edit button */}
+          <div className="input-container full">
+            <label htmlFor="last-name">Last Name*</label>
+            <input type="text" id="last-name" value={lastName} onChange={this.updateLastName}/>
+          </div>
+          {/* email input */}
+          <div className="input-container">
+            <label htmlFor="email">Email Address*</label>
+            <input type="email" id="email" value={email} onChange={this.updateEmail}/>
+          </div>
+          {/* phone input */}
+          <div className="input-container">
+            <label htmlFor="phone">Phone Number</label>
+            <input type="text" id="phone" value={phone} onChange={this.updatePhone}/>
+          </div>
+          {/* address input */}
+          <div className="input-container full">
+            <label htmlFor="address">Address</label>
+            <input type="text" id="address" value={address} onChange={this.updateAddress}/>
+          </div>
+          {/* zip code */}
+          <div className="input-container">
+            <label htmlFor="zip">ZIP Code</label>
+            <input type="text" id="zip" value={zip} onChange={this.updateZip}/>
+          </div>
+          {/* city */}
+          <div className="input-container">
+            <label htmlFor="city">City/Town</label>
+            <input type="text" id="city" value={city} onChange={this.updateCity}/>
+          </div>
+          {/* save/edit button */}
         </form>
       </div>
     )

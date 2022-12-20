@@ -26,6 +26,10 @@ class App extends Component {
       // For future consider adding varied templates
 
       // Consider saving data to local storage
+
+      // style form inputs
+
+      // add option to display all section info together as html
       
       <div className='App'>
         <PersonalInfo />

@@ -29,6 +29,8 @@ class References extends Component {
     }
   }
 
+  toggle
+
   renderFormState (newThis, changeFunction) {
     return (
       <div>
@@ -72,7 +74,7 @@ class References extends Component {
     }
     return (
       <div className="references">
-        <button className="toggle" onClick={this.toggleIncluded}>Include</button>
+      <button className="toggle" onClick={this.toggleIncluded}>Include</button>
         <GenericSection content={<h3>References available upon request</h3>} />
       </div>
     )

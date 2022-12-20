@@ -2,7 +2,7 @@
 .App {
   box-sizing: border-box;
   margin: 0px;
-  padding: 65px 25px;
+  padding: 65px 10vw;
   min-height: 100vh;
   background-color: rgb(220, 220, 230);
   display: flex;

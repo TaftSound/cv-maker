@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-constructor */
 import React, { Component } from "react";
 import "../styles/generic-section.css"
+import "../styles/input-styling.css"
 
 
 // Make a generic section component
@@ -77,7 +78,7 @@ class GenericSection extends Component {
 
     this.collapseExpand = this.collapseExpand.bind(this)
 
-    this.state = { isExpanded: false }
+    this.state = { isExpanded: true }
   }
 
   collapseExpand () {
@@ -100,13 +101,14 @@ class GenericSection extends Component {
             <DeleteButton deleteFunction={this.props.deleteFunction}/>
           </div>
           {header}
+          <div className="spacer"></div>
           {content}
           <SaveButton isSaved={isSaved} changeSaveState={changeSaveState} />
         </div>
       )
     } else {
       return (
-        <div className="section">
+        <div className="section collapsed">
           {header}
         </div>
       )
