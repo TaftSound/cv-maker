@@ -9,39 +9,60 @@ class PersonalInfo extends Component {
     this.renderForm = this.renderForm.bind(this)
     this.renderSaved = this.renderSaved.bind(this)
     this.changeSaveState = this.changeSaveState.bind(this)
+    this.onChange = this.onChange.bind(this)
+    this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
 
-    this.state = {
-      isSaved: false,
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      address: '',
-      zip: '',
-      city: '',
+    const localData = localStorage.getItem('personalInfo')
+    if (localData) {
+      const parsedData = JSON.parse(localData)
+      console.log(parsedData)
+      const { isSaved, firstName, lastName, email, phone, address, zip, city } = parsedData
+      this.state = {
+        isSaved: isSaved,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        address: address,
+        zip: zip,
+        city: city,
+      }  
+    } else {
+      this.state = {
+        isSaved: this.props.saveState,
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        address: '',
+        zip: '',
+        city: '',
+      }
     }
   }
 
-  updateFirstName = (event) => {
-    this.setState({ firstName: event.target.value })
+  async onChange (event) {
+    const fieldName = event.target.id
+    const value = event.target.value
+    await this.setState({ [fieldName]: value })
+    this.updateLocaleStorage()
   }
-  updateLastName = (event) => {
-    this.setState({ lastName: event.target.value })
+
+  updateLocaleStorage () {
+    localStorage.setItem('personalInfo', JSON.stringify(this.state))
   }
-  updateEmail = (event) => {
-    this.setState({ email: event.target.value })
-  }
-  updatePhone = (event) => {
-    this.setState({ phone: event.target.value })
-  }
-  updateAddress = (event) => {
-    this.setState({ address: event.target.value })
-  }
-  updateZip = (event) => {
-    this.setState({ zip: event.target.value })
-  }
-  updateCity = (event) => {
-    this.setState({ city: event.target.value })
+
+  async changeSaveState () {
+    if (this.state.isSaved) {
+      await this.setState({
+        isSaved: false
+      })  
+    } else {
+      await this.setState({
+        isSaved: true
+      })
+    }
+    this.updateLocaleStorage()
   }
 
   renderForm () {
@@ -49,42 +70,34 @@ class PersonalInfo extends Component {
     return (
       <div className="section-content">
         <form>
-          {/* first name + last name input */}
           <div className="input-container full" >
-            <label htmlFor="first-name">First Name*</label>
-            <input type="text" id="first-name" value={firstName} onChange={this.updateFirstName} />
+            <label htmlFor="firstName">First Name*</label>
+            <input type="text" id="firstName" value={firstName} onChange={this.onChange} />
           </div>
-
           <div className="input-container full">
-            <label htmlFor="last-name">Last Name*</label>
-            <input type="text" id="last-name" value={lastName} onChange={this.updateLastName}/>
+            <label htmlFor="lastName">Last Name*</label>
+            <input type="text" id="lastName" value={lastName} onChange={this.onChange}/>
           </div>
-          {/* email input */}
           <div className="input-container">
             <label htmlFor="email">Email Address*</label>
-            <input type="email" id="email" value={email} onChange={this.updateEmail}/>
+            <input type="email" id="email" value={email} onChange={this.onChange}/>
           </div>
-          {/* phone input */}
           <div className="input-container">
             <label htmlFor="phone">Phone Number</label>
-            <input type="text" id="phone" value={phone} onChange={this.updatePhone}/>
+            <input type="text" id="phone" value={phone} onChange={this.onChange}/>
           </div>
-          {/* address input */}
           <div className="input-container full">
             <label htmlFor="address">Address</label>
-            <input type="text" id="address" value={address} onChange={this.updateAddress}/>
+            <input type="text" id="address" value={address} onChange={this.onChange}/>
           </div>
-          {/* zip code */}
           <div className="input-container">
             <label htmlFor="zip">ZIP Code</label>
-            <input type="text" id="zip" value={zip} onChange={this.updateZip}/>
+            <input type="text" id="zip" value={zip} onChange={this.onChange}/>
           </div>
-          {/* city */}
           <div className="input-container">
             <label htmlFor="city">City/Town</label>
-            <input type="text" id="city" value={city} onChange={this.updateCity}/>
+            <input type="text" id="city" value={city} onChange={this.onChange}/>
           </div>
-          {/* save/edit button */}
         </form>
       </div>
     )
@@ -103,18 +116,6 @@ class PersonalInfo extends Component {
         {/* save/edit button */}
       </div>
     )
-  }
-
-  changeSaveState () {
-    if (this.state.isSaved) {
-      this.setState({
-        isSaved: false
-      })  
-    } else {
-      this.setState({
-        isSaved: true
-      })
-    }
   }
 
   render () {

@@ -8,15 +8,32 @@ class ResumeObjective extends Component {
     this.renderForm = this.renderForm.bind(this)
     this.renderSaved = this.renderSaved.bind(this)
     this.changeSaveState = this.changeSaveState.bind(this)
+    this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
+    this.updateObjective = this.updateObjective.bind(this)
 
-    this.state = {
-      isSaved: false,
-      objective: '',
+    const localData = localStorage.getItem('resumeObjective')
+    if (localData) {
+      const parsedData = JSON.parse(localData)
+      const { isSaved, objective } = parsedData
+      this.state = {
+        isSaved: isSaved,
+        objective: objective,
+      }
+    } else {
+      this.state = {
+        isSaved: false,
+        objective: '',
+      }
     }
   }
 
-  updateObjective = (event) => {
-    this.setState({ objective: event.target.value })
+  updateLocaleStorage () {
+    localStorage.setItem('resumeObjective', JSON.stringify(this.state))
+  }
+
+  async updateObjective (event) {
+    await this.setState({ objective: event.target.value })
+    this.updateLocaleStorage()
   }
 
   renderForm () {
@@ -35,16 +52,17 @@ class ResumeObjective extends Component {
     )
   }
 
-  changeSaveState () {
+  async changeSaveState () {
     if (this.state.isSaved) {
-      this.setState({
+      await this.setState({
         isSaved: false
       })  
     } else {
-      this.setState({
+      await this.setState({
         isSaved: true
       })
     }
+    this.updateLocaleStorage()
   }
 
   render () {

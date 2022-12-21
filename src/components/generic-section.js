@@ -16,9 +16,7 @@ class SaveButton extends Component {
   constructor (props) {
     super (props)
 
-    this.state = {
-      isSaved: false
-    }
+    this.state = {}
   }
 
   render () {
@@ -77,16 +75,33 @@ class GenericSection extends Component {
     super (props)
 
     this.collapseExpand = this.collapseExpand.bind(this)
+    this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
 
-    this.state = { isExpanded: true }
+    const { sectionTitle } = this.props
+    const storageKey = `${sectionTitle}Expanded`
+    const localData = localStorage.getItem(storageKey)
+    if (localData) {
+      const parsedData = JSON.parse(localData)
+      const { isExpanded } = parsedData
+      this.state = { isExpanded: isExpanded }
+    } else {
+      this.state = { isExpanded: true }
+    }
   }
 
-  collapseExpand () {
+  updateLocaleStorage () {
+    const { sectionTitle } = this.props
+    const storageKey = `${sectionTitle}Expanded`
+    localStorage.setItem(storageKey, JSON.stringify(this.state))
+  }
+
+  async collapseExpand () {
     if (this.state.isExpanded) {
-      this.setState({ isExpanded: false, })
+      await this.setState({ isExpanded: false, })
     } else {
-      this.setState({ isExpanded: true, })
+      await this.setState({ isExpanded: true, })
     }
+    this.updateLocaleStorage()
   }
 
   render () {

@@ -10,14 +10,20 @@ class Item extends Component {
     this.renderSaved = this.renderSaved.bind(this)
     this.changeSaveState = this.changeSaveState.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
 
     this.state = this.props.stateObject
   }
 
-  onChange (event) {
+  updateLocaleStorage () {
+    this.props.updateLocaleStorage(this.state, this.props.storageKey)
+  }
+
+  async onChange (event) {
     const fieldName = event.target.id
     const value = event.target.value
-    this.setState({ [fieldName]: value })
+    await this.setState({ [fieldName]: value })
+    this.updateLocaleStorage()
   }
 
   renderForm () {
@@ -28,16 +34,17 @@ class Item extends Component {
     return this.props.renderSavedState(this)
   }
 
-  changeSaveState () {
+  async changeSaveState () {
     if (this.state.isSaved) {
-      this.setState({
+      await this.setState({
         isSaved: false
       })  
     } else {
-      this.setState({
+      await this.setState({
         isSaved: true
       })
     }
+    this.updateLocaleStorage()
   }
 
   render () {
@@ -73,20 +80,77 @@ class MultiSection extends Component {
     this.deleteItem = this.deleteItem.bind(this)
     this.shiftItem = this.shiftItem.bind(this)
     this.collapseExpand = this.collapseExpand.bind(this)
+    this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
 
-    this.state = {
+    if (localStorage.getItem(this.props.sectionTitle)) {
+      const localStorageData = localStorage.getItem(this.props.sectionTitle)
+      const parsedData = JSON.parse(localStorageData)
+      const { items, isExpanded } = parsedData
+      const itemsArray = []
+
+      for (const item in items) {
+        const { key } = items[item]
+        const stateObject = items[item].props.stateObject
+        itemsArray.push(
+          <Item 
+            stateObject={stateObject}
+            renderFormState={this.props.renderFormState}
+            renderSavedState={this.props.renderSavedState}
+            deleteFunction={() => { this.deleteItem(key) }}
+            positionFunction={(isMoveUp) => { this.shiftItem(isMoveUp, key) }}
+            updateLocaleStorage={this.updateLocaleStorage}
+            storageKey={key}
+            key={key} />
+        )
+      }
+
+      this.state = {
+        isExpanded: isExpanded,
+        items: itemsArray,
+      }
+    } else {
+      const startKey = uniqid()
+
+      this.state = {
       items: [<Item 
               stateObject={this.props.stateObject}
               renderFormState={this.props.renderFormState}
               renderSavedState={this.props.renderSavedState}
-              deleteFunction={() => { this.deleteItem('startKey123') }}
-              positionFunction={(isMoveUp) => { this.shiftItem(isMoveUp, 'startKey123') }}
-              key={'startKey123'} />],
+              deleteFunction={() => { this.deleteItem(startKey) }}
+              positionFunction={(isMoveUp) => { this.shiftItem(isMoveUp, startKey) }}
+              updateLocaleStorage={this.updateLocaleStorage}
+              key={startKey}
+              storageKey={startKey} />],
               isExpanded: true,
+      }
     }
   }
 
-  addItem () {
+  updateLocaleStorage (stateObject, storageKey) {
+    const { sectionTitle } = this.props
+    if (stateObject) {
+      let storedData = localStorage.getItem(sectionTitle)
+      
+      if (!storedData) {
+        localStorage.setItem(sectionTitle, JSON.stringify(this.state))
+        storedData = localStorage.getItem(sectionTitle)
+      }
+      const parsedData = JSON.parse(storedData)
+
+
+      for (const item of parsedData.items) {
+        if (item.key === storageKey) {
+          item.props.stateObject = stateObject
+        }
+      }
+      
+      localStorage.setItem(sectionTitle, JSON.stringify(parsedData))
+    } else {
+      localStorage.setItem(sectionTitle, JSON.stringify(this.state))
+    }
+  }
+
+  async addItem () {
     const { items } = this.state
     const key = uniqid()
     items.push(
@@ -96,23 +160,28 @@ class MultiSection extends Component {
       renderSavedState={this.props.renderSavedState}
       deleteFunction={() => { this.deleteItem(key) }}
       positionFunction={(isMoveUp) => { this.shiftItem(isMoveUp, key) }}
+      updateLocaleStorage={this.updateLocaleStorage}
+      storageKey={key}
       key={key} />
     )
-    this.setState({
+
+    await this.setState({
       items: items
     })
+    this.updateLocaleStorage()
   }
 
-  deleteItem (key) {
+  async deleteItem (key) {
     const { items } = this.state
     const updatedItems = items.filter((item) => {
       if (item.key === key) { return false }
       return true
     })
-    this.setState({ items: updatedItems })
+    await this.setState({ items: updatedItems })
+    this.updateLocaleStorage()
   }
 
-  shiftItem (isMoveUp, key) {
+  async shiftItem (isMoveUp, key) {
     const { items } = this.state
     if (items.length < 2) { return }
     let index
@@ -129,15 +198,17 @@ class MultiSection extends Component {
     const shiftedItem = items[newIndex]
     items.splice(newIndex, 1, clickedItem)
     items.splice(index, 1, shiftedItem)
-    this.setState({ items: items })
+    await this.setState({ items: items })
+    this.updateLocaleStorage()
   }
 
-  collapseExpand () {
+  async collapseExpand () {
     if (this.state.isExpanded) {
-      this.setState({ isExpanded: false, })
+      await this.setState({ isExpanded: false, })
     } else {
-      this.setState({ isExpanded: true, })
+      await this.setState({ isExpanded: true, })
     }
+    this.updateLocaleStorage()
   }
 
   render () {

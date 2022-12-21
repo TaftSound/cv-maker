@@ -19,22 +19,39 @@ class App extends Component {
     this.renderProgressBar = this.renderProgressBar.bind(this)
     this.renderPage = this.renderPage.bind(this)
     this.renderPageByIndex = this.renderPageByIndex.bind(this)
+    this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
 
-    this.state = {
-      currentPage: 0,
+    const localData = localStorage.getItem('currentPage')
+    if (localData) {
+      const parsedData = JSON.parse(localData)
+      const { currentPage } = parsedData
+      this.state = {
+        currentPage: currentPage
+      }
+    } else {
+      this.state = {
+        currentPage: 0,
+      }
     }
   }
 
-  renderPreviousPage () {
-    const { currentPage } = this.state
-    this.setState({ currentPage: currentPage - 1 })
+  updateLocaleStorage () {
+    localStorage.setItem('currentPage', JSON.stringify(this.state))
   }
-  renderNextPage () {
+
+  async renderPreviousPage () {
     const { currentPage } = this.state
-    this.setState({ currentPage: currentPage + 1 })
+    await this.setState({ currentPage: currentPage - 1 })
+    this.updateLocaleStorage()
   }
-  renderPageByIndex (pageIndex) {
-    this.setState({ currentPage: pageIndex })
+  async renderNextPage () {
+    const { currentPage } = this.state
+    await this.setState({ currentPage: currentPage + 1 })
+    this.updateLocaleStorage()
+  }
+  async renderPageByIndex (pageIndex) {
+    await this.setState({ currentPage: pageIndex })
+    this.updateLocaleStorage()
   }
 
   renderProgressBar () {
