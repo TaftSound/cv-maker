@@ -1,6 +1,7 @@
 import { Component } from "react";
 import GenericSection from "./generic-section";
 import uniqid from "uniqid";
+import "../styles/input-styling.css"
 
 class Item extends Component {
   constructor (props) {
@@ -137,7 +138,6 @@ class MultiSection extends Component {
       }
       const parsedData = JSON.parse(storedData)
 
-
       for (const item of parsedData.items) {
         if (item.key === storageKey) {
           item.props.stateObject = stateObject
@@ -217,13 +217,14 @@ class MultiSection extends Component {
       return (
         <div className="multi-section">
           <h2 onClick={this.collapseExpand}>{this.props.sectionTitle}</h2>
+          <div className="spacer"></div>
           <ul>{items}</ul>
-          <button className="new-job-button" onClick={this.addItem}>+</button>
+          <button className="new-item-button" onClick={this.addItem}><span>+</span> <p>add another</p></button>
         </div>
       )
     } else {
       return (
-        <div className="section">
+        <div className="section collapsed">
           <h2 onClick={this.collapseExpand}>{this.props.sectionTitle}</h2>
         </div>
       )

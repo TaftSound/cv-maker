@@ -35,14 +35,22 @@ class References extends Component {
     return (
       <div>
         <form>
-          <label htmlFor="name">Name: </label>
-          <input type="text" id="name" value={newThis.state.name} onChange={changeFunction}/>
-          <label htmlFor="company">Company: </label>
-          <input type="text" id="company" value={newThis.state.company} onChange={changeFunction}/>
-          <label htmlFor="phone">Phone: </label>
-          <input type="text" id="phone" value={newThis.state.phone} onChange={changeFunction}/>
-          <label htmlFor="email">Email: </label>
-          <input type="text" id="email" value={newThis.state.email} onChange={changeFunction}/>
+          <div className="input-container full">
+            <label htmlFor="name">Name: </label>
+            <input type="text" id="name" value={newThis.state.name} onChange={changeFunction}/>
+          </div>
+          <div className="input-container full">
+            <label htmlFor="company">Company: </label>
+            <input type="text" id="company" value={newThis.state.company} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="phone">Phone: </label>
+            <input type="text" id="phone" value={newThis.state.phone} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="email">Email: </label>
+            <input type="text" id="email" value={newThis.state.email} onChange={changeFunction}/>
+          </div>
         </form>
       </div>
     )
@@ -65,7 +73,7 @@ class References extends Component {
         <div className="references">
           <button className="toggle" onClick={this.toggleIncluded}>Remove</button>
           <MultiSection
-          sectionTitle='References: '
+          sectionTitle='References'
           stateObject={this.stateObject}
           renderFormState={this.renderFormState}
           renderSavedState={this.renderSavedState} />

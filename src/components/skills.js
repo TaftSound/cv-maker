@@ -19,10 +19,14 @@ class Skills extends Component {
     return (
       <div>
         <form>
-          <label htmlFor="skill">Skill: </label>
-          <input type="text" id="skill" value={newThis.state.skill} onChange={changeFunction}/>
-          <label htmlFor="yearsExperience">Years Of Experience: </label>
-          <input type="text" id="yearsExperience" value={newThis.state.yearsExperience} onChange={changeFunction}/>
+          <div className="input-container">
+            <label htmlFor="skill">Skill: </label>
+            <input type="text" id="skill" value={newThis.state.skill} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="yearsExperience">Years Of Experience: </label>
+            <input type="text" id="yearsExperience" value={newThis.state.yearsExperience} onChange={changeFunction}/>
+          </div>
         </form>
       </div>
     )
@@ -40,7 +44,7 @@ class Skills extends Component {
   render () {
     return (
       <MultiSection
-      sectionTitle='Skills: '
+      sectionTitle='Skills'
       stateObject={this.stateObject}
       renderFormState={this.renderFormState}
       renderSavedState={this.renderSavedState} />

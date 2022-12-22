@@ -18,8 +18,10 @@ class Interests extends Component {
     return (
       <div>
         <form>
-          <label htmlFor="interest">Interest: </label>
-          <input type="text" id="interest" value={newThis.state.interest} onChange={changeFunction}/>
+          <div className="input-container full">
+            <label htmlFor="interest">Interest: </label>
+            <input type="text" id="interest" value={newThis.state.interest} onChange={changeFunction}/>
+          </div>
         </form>
       </div>
     )
@@ -36,7 +38,7 @@ class Interests extends Component {
   render () {
     return (
       <MultiSection
-      sectionTitle='Interests: '
+      sectionTitle='Interests'
       stateObject={this.stateObject}
       renderFormState={this.renderFormState}
       renderSavedState={this.renderSavedState} />

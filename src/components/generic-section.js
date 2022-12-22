@@ -23,9 +23,9 @@ class SaveButton extends Component {
     const { isSaved, changeSaveState } = this.props
     if (!changeSaveState) { return }
     if (isSaved) {
-      return <button onClick={changeSaveState}>Edit</button>
+      return <button className="save-button" onClick={changeSaveState}>Edit</button>
     } else {
-      return <button onClick={changeSaveState}>Save</button>
+      return <button className="save-button" onClick={changeSaveState}>Save</button>
     }
   }
 }
@@ -42,7 +42,7 @@ class DeleteButton extends Component {
       return
     } else {
       return (
-        <button onClick={this.props.deleteFunction}>X</button>
+        <button className="delete-button" onClick={this.props.deleteFunction}>X</button>
       )
     }
   }
@@ -62,8 +62,8 @@ class PositionButtons extends Component {
     } else {
       return (
         <div className="position-buttons">
-          <button onClick={() => { positionFunction(true) }}>Up</button>
-          <button onClick={() => { positionFunction(false) }}>Down</button>
+          <button onClick={() => { positionFunction(true) }}>{'<'}</button>
+          <button onClick={() => { positionFunction(false) }}>{'>'}</button>
         </div>
       )
     }
@@ -111,10 +111,8 @@ class GenericSection extends Component {
     if (this.state.isExpanded) {
       return (
         <div className="section">
-          <div className="button-div">
             <PositionButtons positionFunction={this.props.positionFunction}/>
             <DeleteButton deleteFunction={this.props.deleteFunction}/>
-          </div>
           {header}
           <div className="spacer"></div>
           {content}

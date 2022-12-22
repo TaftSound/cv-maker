@@ -56,9 +56,47 @@ button {
   font-weight: 700;
   font-size: 20px;
   padding: 9px 25px;
+  cursor: pointer;
 }
-.button-div {
+.new-item-button {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
+  text-align: center;
+  width: 100%;
+  color: var(--main-color);
+  background-color: transparent;
+}
+.new-item-button .plus {
+  display: block;
+  font-size: 35px;
+}
+.new-item-button p {
+  margin: 0px 10px;
+}
+.delete-button {
+  background-color: transparent;
+  color: gray;
+  border-color: var(--light-gray);
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 0px 5px;
+  font-size: 18px;
+}
+.position-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  position: absolute;
+  right: -46.5px;
+  top: calc(50% - 65px);
+}
+.position-buttons button {
+  background-color: transparent;
+  color: var(--medium-gray);
+  border-color: transparent;
+  transform: rotate(90deg);
+  padding: 2.5px 12.5px;
+  padding-bottom: 5px;
 }

@@ -22,16 +22,26 @@ class Education extends Component {
     return (
       <div>
         <form>
-          <label htmlFor="degree">Degree: </label>
-          <input type="text" id="degree" value={newThis.state.degree} onChange={changeFunction}/>
-          <label htmlFor="city">City: </label>
-          <input type="text" id="city" value={newThis.state.city} onChange={changeFunction}/>
-          <label htmlFor="school">School: </label>
-          <input type="text" id="school" value={newThis.state.school} onChange={changeFunction}/>
-          <label htmlFor="start">Start Date: </label>
-          <input type="text" id="start" value={newThis.state.start} onChange={changeFunction}/>
-          <label htmlFor="end">End Date: </label>
-          <input type="text" id="end" value={newThis.state.end} onChange={changeFunction}/>
+          <div className="input-container">
+            <label htmlFor="degree">Degree</label>
+            <input type="text" id="degree" value={newThis.state.degree} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="city">City/Town</label>
+            <input type="text" id="city" value={newThis.state.city} onChange={changeFunction}/>
+          </div>
+          <div className="input-container full">
+            <label htmlFor="school">School</label>
+            <input type="text" id="school" value={newThis.state.school} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="start">Start Date</label>
+            <input type="text" id="start" value={newThis.state.start} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="end">End Date</label>
+            <input type="text" id="end" value={newThis.state.end} onChange={changeFunction}/>
+          </div>
         </form>
       </div>
     )
@@ -51,7 +61,7 @@ class Education extends Component {
   render () {
     return (
       <MultiSection
-      sectionTitle='Education: '
+      sectionTitle='Education'
       stateObject={this.stateObject}
       renderFormState={this.renderFormState}
       renderSavedState={this.renderSavedState} />

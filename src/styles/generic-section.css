@@ -1,6 +1,7 @@
 
 .section,
 .multi-section {
+  position: relative;
   padding: 25px 50px;
   padding-bottom: 35px;
   background-color: white;
@@ -8,16 +9,19 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 .section.collapsed {
   padding-bottom: 25px;
 }
 .multi-section .section {
-  border: solid 1px rgb(205, 205, 205);
+  border: solid 2px var(--light-gray);
   box-shadow: none;
   padding-bottom: 25px;
+  margin-bottom: 10px;
 }
-.section h2 {
+.section h2,
+.multi-section h2 {
   cursor: pointer;
   margin: 0px;
   padding: 10px 0px;
@@ -30,6 +34,9 @@
   width: 100%;
   height: 2px;
   border-radius: 5px;
+}
+.multi-section .spacer {
+  margin-bottom: 5px;
 }
 .multi-section .section .spacer {
   display: none;

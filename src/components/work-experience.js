@@ -23,18 +23,30 @@ class WorkExperience extends Component {
     return (
       <div>
         <form>
-          <label htmlFor="title">Job Title: </label>
-          <input type="text" id="title" value={newThis.state.title} onChange={changeFunction}/>
-          <label htmlFor="employer">Employer: </label>
-          <input type="text" id="employer" value={newThis.state.employer} onChange={changeFunction}/>
-          <label htmlFor="city">City: </label>
-          <input type="text" id="city" value={newThis.state.city} onChange={changeFunction}/>
-          <label htmlFor="startDate">Start Date: </label>
-          <input type="text" id="startDate" value={newThis.state.startDate} onChange={changeFunction}/>
-          <label htmlFor="endDate">End Date: </label>
-          <input type="text" id="endDate" value={newThis.state.endDate} onChange={changeFunction}/>
-          <label htmlFor="description">Description: </label>
-          <input type="text" id="description" value={newThis.state.description} onChange={changeFunction}/>     
+          <div className="input-container">
+            <label htmlFor="title">Job Title</label>
+            <input type="text" id="title" value={newThis.state.title} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="city">City/Town </label>
+            <input type="text" id="city" value={newThis.state.city} onChange={changeFunction}/>
+          </div>
+          <div className="input-container full">
+            <label htmlFor="employer">Employer</label>
+            <input type="text" id="employer" value={newThis.state.employer} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="startDate">Start Date</label>
+            <input type="text" id="startDate" value={newThis.state.startDate} onChange={changeFunction}/>
+          </div>
+          <div className="input-container">
+            <label htmlFor="endDate">End Date</label>
+            <input type="text" id="endDate" value={newThis.state.endDate} onChange={changeFunction}/>
+          </div>
+          <div className="input-container full">
+            <label htmlFor="description">Description</label>
+            <input type="text" id="description" value={newThis.state.description} onChange={changeFunction}/>
+          </div>
         </form>
       </div>
     )
@@ -55,7 +67,7 @@ class WorkExperience extends Component {
   render () {
     return (
       <MultiSection
-      sectionTitle='Work Experience: '
+      sectionTitle='Work Experience'
       stateObject={this.stateObject}
       renderFormState={this.renderFormState}
       renderSavedState={this.renderSavedState} />
