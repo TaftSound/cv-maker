@@ -24,7 +24,7 @@ class WorkExperience extends Component {
       <div>
         <form>
           <div className="input-container">
-            <label htmlFor="title">Job Title</label>
+            <label htmlFor="title">Job Title*</label>
             <input type="text" id="title" value={newThis.state.title} onChange={changeFunction}/>
           </div>
           <div className="input-container">
@@ -32,15 +32,15 @@ class WorkExperience extends Component {
             <input type="text" id="city" value={newThis.state.city} onChange={changeFunction}/>
           </div>
           <div className="input-container full">
-            <label htmlFor="employer">Employer</label>
+            <label htmlFor="employer">Employer*</label>
             <input type="text" id="employer" value={newThis.state.employer} onChange={changeFunction}/>
           </div>
           <div className="input-container">
-            <label htmlFor="startDate">Start Date</label>
+            <label htmlFor="startDate">Start Date*</label>
             <input type="text" id="startDate" value={newThis.state.startDate} onChange={changeFunction}/>
           </div>
           <div className="input-container">
-            <label htmlFor="endDate">End Date</label>
+            <label htmlFor="endDate">End Date*</label>
             <input type="text" id="endDate" value={newThis.state.endDate} onChange={changeFunction}/>
           </div>
           <div className="input-container full">
@@ -56,10 +56,7 @@ class WorkExperience extends Component {
     return (
       <div>
         <h3>{newThis.state.title}</h3>
-        <p>{newThis.state.employer}</p>
-        <p>{newThis.state.city}</p>
         <p>{newThis.state.startDate} - {newThis.state.endDate}</p>
-        <p>{newThis.state.description}</p>   
       </div>
     )
   }

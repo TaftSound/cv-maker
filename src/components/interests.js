@@ -19,7 +19,7 @@ class Interests extends Component {
       <div>
         <form>
           <div className="input-container full">
-            <label htmlFor="interest">Interest: </label>
+            <label htmlFor="interest">Interest*</label>
             <input type="text" id="interest" value={newThis.state.interest} onChange={changeFunction}/>
           </div>
         </form>

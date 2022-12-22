@@ -23,7 +23,7 @@ class Education extends Component {
       <div>
         <form>
           <div className="input-container">
-            <label htmlFor="degree">Degree</label>
+            <label htmlFor="degree">Degree*</label>
             <input type="text" id="degree" value={newThis.state.degree} onChange={changeFunction}/>
           </div>
           <div className="input-container">
@@ -31,7 +31,7 @@ class Education extends Component {
             <input type="text" id="city" value={newThis.state.city} onChange={changeFunction}/>
           </div>
           <div className="input-container full">
-            <label htmlFor="school">School</label>
+            <label htmlFor="school">School*</label>
             <input type="text" id="school" value={newThis.state.school} onChange={changeFunction}/>
           </div>
           <div className="input-container">
@@ -51,9 +51,7 @@ class Education extends Component {
     return (
       <div>
         <h3>{newThis.state.degree}</h3>
-        <p>{newThis.state.city}</p>
         <p>{newThis.state.school}</p>
-        <p>{newThis.state.start} - {newThis.state.end}</p>
       </div>
     )
   }

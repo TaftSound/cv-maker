@@ -20,11 +20,11 @@ class Skills extends Component {
       <div>
         <form>
           <div className="input-container">
-            <label htmlFor="skill">Skill: </label>
+            <label htmlFor="skill">Skill*</label>
             <input type="text" id="skill" value={newThis.state.skill} onChange={changeFunction}/>
           </div>
           <div className="input-container">
-            <label htmlFor="yearsExperience">Years Of Experience: </label>
+            <label htmlFor="yearsExperience">Years Of Experience</label>
             <input type="text" id="yearsExperience" value={newThis.state.yearsExperience} onChange={changeFunction}/>
           </div>
         </form>

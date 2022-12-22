@@ -41,6 +41,9 @@ textarea {
 .multi-section textarea {
   height: 125px;
 }
+.section-edit-div {
+  position: absolute;
+}
 input::placeholder {
   font-family: inherit;
   font-size: 15px;
@@ -83,7 +86,8 @@ button {
 .new-item-button p {
   margin: 0px 10px;
 }
-.delete-button {
+.delete-button,
+.edit-button {
   background-color: transparent;
   color: gray;
   border-color: var(--light-gray);
@@ -93,6 +97,9 @@ button {
   padding: 0px 5px;
   font-size: 18px;
 }
+.edit-button {
+  right: 45px;
+}
 .position-buttons {
   display: flex;
   flex-direction: column;
@@ -100,6 +107,10 @@ button {
   position: absolute;
   right: -46.5px;
   top: calc(50% - 65px);
+}
+.section.saved .position-buttons {
+  gap: 5px;
+  top: calc(50% - 40px);
 }
 .position-buttons button {
   background-color: transparent;

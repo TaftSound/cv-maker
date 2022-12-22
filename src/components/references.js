@@ -36,19 +36,19 @@ class References extends Component {
       <div>
         <form>
           <div className="input-container full">
-            <label htmlFor="name">Name: </label>
+            <label htmlFor="name">Name*</label>
             <input type="text" id="name" value={newThis.state.name} onChange={changeFunction}/>
           </div>
           <div className="input-container full">
-            <label htmlFor="company">Company: </label>
+            <label htmlFor="company">Company*</label>
             <input type="text" id="company" value={newThis.state.company} onChange={changeFunction}/>
           </div>
           <div className="input-container">
-            <label htmlFor="phone">Phone: </label>
+            <label htmlFor="phone">Phone</label>
             <input type="text" id="phone" value={newThis.state.phone} onChange={changeFunction}/>
           </div>
           <div className="input-container">
-            <label htmlFor="email">Email: </label>
+            <label htmlFor="email">Email</label>
             <input type="text" id="email" value={newThis.state.email} onChange={changeFunction}/>
           </div>
         </form>
@@ -61,8 +61,6 @@ class References extends Component {
       <div>
         <h3>{newThis.state.name}</h3>
         <p>{newThis.state.company}</p>
-        <p>{newThis.state.phone}</p>
-        <p>{newThis.state.email}</p>
       </div>
     )
   }

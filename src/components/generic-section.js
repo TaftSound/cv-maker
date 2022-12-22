@@ -23,7 +23,7 @@ class SaveButton extends Component {
     const { isSaved, changeSaveState } = this.props
     if (!changeSaveState) { return }
     if (isSaved) {
-      return <button className="save-button" onClick={changeSaveState}>Edit</button>
+      return <button className="edit-button" onClick={changeSaveState}>Edit</button>
     } else {
       return <button className="save-button" onClick={changeSaveState}>Save</button>
     }
@@ -106,13 +106,15 @@ class GenericSection extends Component {
 
   render () {
     const { content, sectionTitle, isSaved, changeSaveState } = this.props
-    let header
+    let header = <div className="section-edit-div"></div>
     if (sectionTitle) { header = <h2 onClick={this.collapseExpand}>{sectionTitle}</h2> }
+    let sectionClassName = "section"
+    if (isSaved) { sectionClassName = "section saved" }
     if (this.state.isExpanded) {
       return (
-        <div className="section">
-            <PositionButtons positionFunction={this.props.positionFunction}/>
-            <DeleteButton deleteFunction={this.props.deleteFunction}/>
+        <div className={sectionClassName}>
+          <PositionButtons positionFunction={this.props.positionFunction}/>
+          <DeleteButton deleteFunction={this.props.deleteFunction}/>
           {header}
           <div className="spacer"></div>
           {content}

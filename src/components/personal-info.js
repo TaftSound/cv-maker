@@ -15,7 +15,6 @@ class PersonalInfo extends Component {
     const localData = localStorage.getItem('personalInfo')
     if (localData) {
       const parsedData = JSON.parse(localData)
-      console.log(parsedData)
       const { isSaved, firstName, lastName, email, phone, address, zip, city } = parsedData
       this.state = {
         isSaved: isSaved,
