@@ -45,7 +45,7 @@ class WorkExperience extends Component {
           </div>
           <div className="input-container full">
             <label htmlFor="description">Description</label>
-            <input type="text" id="description" value={newThis.state.description} onChange={changeFunction}/>
+            <textarea id="description" value={newThis.state.description} onChange={changeFunction}/>
           </div>
         </form>
       </div>

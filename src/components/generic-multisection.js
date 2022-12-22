@@ -1,7 +1,6 @@
 import { Component } from "react";
 import GenericSection from "./generic-section";
 import uniqid from "uniqid";
-import "../styles/input-styling.css"
 
 class Item extends Component {
   constructor (props) {
