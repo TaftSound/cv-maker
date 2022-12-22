@@ -78,7 +78,7 @@ class GenericSection extends Component {
     this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
 
     const { sectionTitle } = this.props
-    const storageKey = `${sectionTitle}Expanded`
+    const storageKey = sectionTitle + 'Expanded'
     const localData = localStorage.getItem(storageKey)
     if (localData) {
       const parsedData = JSON.parse(localData)
@@ -91,7 +91,7 @@ class GenericSection extends Component {
 
   updateLocaleStorage () {
     const { sectionTitle } = this.props
-    const storageKey = `${sectionTitle}Expanded`
+    const storageKey = sectionTitle + 'Expanded'
     localStorage.setItem(storageKey, JSON.stringify(this.state))
   }
 

@@ -82,10 +82,8 @@ class MultiSection extends Component {
     this.collapseExpand = this.collapseExpand.bind(this)
     this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
 
-    if (localStorage.getItem(this.props.sectionTitle)) {
-      const localStorageData = localStorage.getItem(this.props.sectionTitle)
-      const parsedData = JSON.parse(localStorageData)
-      const { items, isExpanded } = parsedData
+    let interpretStoredItems = (parsedData) => {
+      const { items } = parsedData
       const itemsArray = []
 
       for (const item in items) {
@@ -103,6 +101,15 @@ class MultiSection extends Component {
             key={key} />
         )
       }
+      return itemsArray
+    }
+    this.interpretStoredItems = interpretStoredItems.bind(this)
+
+    if (localStorage.getItem(this.props.sectionTitle)) {
+      const localStorageData = localStorage.getItem(this.props.sectionTitle)
+      const parsedData = JSON.parse(localStorageData)
+      const itemsArray = interpretStoredItems(parsedData)
+      const { isExpanded } = parsedData
 
       this.state = {
         isExpanded: isExpanded,
@@ -126,7 +133,7 @@ class MultiSection extends Component {
     }
   }
 
-  updateLocaleStorage (stateObject, storageKey) {
+  async updateLocaleStorage (stateObject, storageKey) {
     const { sectionTitle } = this.props
     if (stateObject) {
       let storedData = localStorage.getItem(sectionTitle)
@@ -142,8 +149,11 @@ class MultiSection extends Component {
           item.props.stateObject = stateObject
         }
       }
-      
+
+      const itemsArray = this.interpretStoredItems(parsedData)
+      await this.setState({ items: itemsArray })
       localStorage.setItem(sectionTitle, JSON.stringify(parsedData))
+
     } else {
       localStorage.setItem(sectionTitle, JSON.stringify(this.state))
     }
