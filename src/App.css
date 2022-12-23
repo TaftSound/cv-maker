@@ -15,7 +15,7 @@
 .content-div {
   position: relative;
   box-sizing: border-box;
-  padding: 65px 10vw;
+  padding: 65px calc(30vw - 250px);
   padding-top: 0px;
   display: flex;
   flex-direction: column;
