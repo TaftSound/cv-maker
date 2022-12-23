@@ -1,5 +1,6 @@
 import { Component } from "react";
 import MultiSection from "./generic-multisection";
+import DateRangeSelect from "./date-range-select";
 
 class Education extends Component {
   constructor (props) {
@@ -14,8 +15,10 @@ class Education extends Component {
     degree: '',
     city: '',
     school: '',
-    start: '',
-    end: '',
+    startDateMonth: 'January',
+    startDateYear: '2022',
+    endDateMonth: 'July',
+    endDateYear: '2022',
   }
 
   renderFormState (newThis, changeFunction) {
@@ -34,14 +37,12 @@ class Education extends Component {
             <label htmlFor="school">School*</label>
             <input type="text" id="school" value={newThis.state.school} onChange={changeFunction}/>
           </div>
-          <div className="input-container">
-            <label htmlFor="start">Start Date</label>
-            <input type="text" id="start" value={newThis.state.start} onChange={changeFunction}/>
-          </div>
-          <div className="input-container">
-            <label htmlFor="end">End Date</label>
-            <input type="text" id="end" value={newThis.state.end} onChange={changeFunction}/>
-          </div>
+          <DateRangeSelect
+          startDateMonth={newThis.state.startDateMonth}
+          startDateYear={newThis.state.startDateYear}
+          endDateMonth={newThis.state.endDateMonth}
+          endDateYear={newThis.state.endDateYear}
+          onChange={changeFunction} />
         </form>
       </div>
     )

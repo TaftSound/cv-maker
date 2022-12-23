@@ -1,5 +1,6 @@
 import { Component } from "react";
 import MultiSection from "./generic-multisection";
+import DateRangeSelect from "./date-range-select";
 
 class WorkExperience extends Component {
   constructor (props) {
@@ -14,8 +15,10 @@ class WorkExperience extends Component {
     title: '',
     employer: '',
     city: '',
-    startDate: '',
-    endDate: '',
+    startDateMonth: 'January',
+    startDateYear: '2022',
+    endDateMonth: 'July',
+    endDateYear: '2022',
     description: '',
   }
 
@@ -35,14 +38,12 @@ class WorkExperience extends Component {
             <label htmlFor="employer">Employer*</label>
             <input type="text" id="employer" value={newThis.state.employer} onChange={changeFunction}/>
           </div>
-          <div className="input-container">
-            <label htmlFor="startDate">Start Date*</label>
-            <input type="text" id="startDate" value={newThis.state.startDate} onChange={changeFunction}/>
-          </div>
-          <div className="input-container">
-            <label htmlFor="endDate">End Date*</label>
-            <input type="text" id="endDate" value={newThis.state.endDate} onChange={changeFunction}/>
-          </div>
+          <DateRangeSelect
+          startDateMonth={newThis.state.startDateMonth}
+          startDateYear={newThis.state.startDateYear}
+          endDateMonth={newThis.state.endDateMonth}
+          endDateYear={newThis.state.endDateYear}
+          onChange={changeFunction} />
           <div className="input-container full">
             <label htmlFor="description">Description</label>
             <textarea id="description" value={newThis.state.description} onChange={changeFunction}/>
@@ -56,7 +57,7 @@ class WorkExperience extends Component {
     return (
       <div>
         <h3>{newThis.state.title}</h3>
-        <p>{newThis.state.startDate} - {newThis.state.endDate}</p>
+        <p>{newThis.state.startDateMonth + " " + newThis.state.startDateYear} - {newThis.state.endDateMonth + " " + newThis.state.endDateYear}</p>
       </div>
     )
   }

@@ -17,12 +17,16 @@
 .input-container.full {
   grid-column: span 2;
 }
+.select-container {
+  display: flex;
+  gap: 25px;
+}
 label {
   color: dimgray;
   user-select: none;
   font-size: 15px;
 }
-input, textarea {
+input, textarea, select {
   border: solid 2px var(--light-gray);
   outline: none;
   border-radius: 5px;
