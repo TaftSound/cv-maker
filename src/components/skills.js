@@ -7,6 +7,7 @@ class Skills extends Component {
 
     this.renderFormState = this.renderFormState.bind(this)
     this.renderSavedState = this.renderSavedState.bind(this)
+    this.validate = this.validate.bind(this)
   }
 
   stateObject = {
@@ -15,13 +16,21 @@ class Skills extends Component {
     yearsExperience: '',
   }
 
+  validate (event, msg) {
+    if (!event.target.validity.valid) {
+      event.target.setCustomValidity(msg)
+      event.target.reportValidity()
+    }
+  }
+
   renderFormState (newThis, changeFunction) {
     return (
       <div>
         <form>
           <div className="input-container">
             <label htmlFor="skill">Skill*</label>
-            <input type="text" id="skill" value={newThis.state.skill} onChange={changeFunction}/>
+            <input type="text" id="skill" required={true} value={newThis.state.skill} onChange={changeFunction} 
+              onBlur={(event) => { this.validate(event, 'Skill field is required') }} />
           </div>
           <div className="input-container">
             <label htmlFor="yearsExperience">Years Of Experience</label>

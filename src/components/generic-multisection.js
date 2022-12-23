@@ -22,6 +22,7 @@ class Item extends Component {
   async onChange (event) {
     const fieldName = event.target.id
     const value = event.target.value
+    event.target.setCustomValidity('')
     await this.setState({ [fieldName]: value })
     this.updateLocaleStorage()
   }

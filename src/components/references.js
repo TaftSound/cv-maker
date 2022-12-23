@@ -9,6 +9,7 @@ class References extends Component {
     this.renderFormState = this.renderFormState.bind(this)
     this.renderSavedState = this.renderSavedState.bind(this)
     this.toggleIncluded = this.toggleIncluded.bind(this)
+    this.validate = this.validate.bind(this)
 
     this.state = { includeReferences: true }
   }
@@ -29,7 +30,12 @@ class References extends Component {
     }
   }
 
-  toggle
+  validate (event, msg) {
+    if (!event.target.validity.valid) {
+      event.target.setCustomValidity(msg)
+      event.target.reportValidity()
+    }
+  }
 
   renderFormState (newThis, changeFunction) {
     return (
@@ -37,11 +43,13 @@ class References extends Component {
         <form>
           <div className="input-container full">
             <label htmlFor="name">Name*</label>
-            <input type="text" id="name" value={newThis.state.name} onChange={changeFunction}/>
+            <input type="text" id="name" required={true} value={newThis.state.name} onChange={changeFunction}
+            onBlur={(event) => { this.validate(event, 'Name is required') }} />
           </div>
           <div className="input-container full">
             <label htmlFor="company">Company*</label>
-            <input type="text" id="company" value={newThis.state.company} onChange={changeFunction}/>
+            <input type="text" id="company" required={true} value={newThis.state.company} onChange={changeFunction}
+            onBlur={(event) => { this.validate(event, 'Company field is required') }} />
           </div>
           <div className="input-container">
             <label htmlFor="phone">Phone</label>

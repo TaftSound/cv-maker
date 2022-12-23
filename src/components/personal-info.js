@@ -10,6 +10,7 @@ class PersonalInfo extends Component {
     this.renderSaved = this.renderSaved.bind(this)
     this.changeSaveState = this.changeSaveState.bind(this)
     this.onChange = this.onChange.bind(this)
+    this.validate = this.validate.bind(this)
     this.updateLocaleStorage = this.updateLocaleStorage.bind(this)
 
     const localData = localStorage.getItem('personalInfo')
@@ -43,8 +44,15 @@ class PersonalInfo extends Component {
   async onChange (event) {
     const fieldName = event.target.id
     const value = event.target.value
+    event.target.setCustomValidity('')
     await this.setState({ [fieldName]: value })
     this.updateLocaleStorage()
+  }
+  validate (event, msg) {
+    if (!event.target.validity.valid) {
+      event.target.setCustomValidity(msg)
+      event.target.reportValidity()
+    }
   }
 
   updateLocaleStorage () {
@@ -71,15 +79,18 @@ class PersonalInfo extends Component {
         <form>
           <div className="input-container full" >
             <label htmlFor="firstName">First Name*</label>
-            <input type="text" id="firstName" value={firstName} onChange={this.onChange} />
+            <input type="text" id="firstName" required={true} value={firstName} onChange={this.onChange}
+            onBlur={(event) => { this.validate(event, 'First name is required') }} />
           </div>
           <div className="input-container full">
             <label htmlFor="lastName">Last Name*</label>
-            <input type="text" id="lastName" value={lastName} onChange={this.onChange}/>
+            <input type="text" id="lastName" required={true} value={lastName} onChange={this.onChange}
+            onBlur={(event) => { this.validate(event, 'Last name is required') }} />
           </div>
           <div className="input-container">
             <label htmlFor="email">Email Address*</label>
-            <input type="email" id="email" value={email} onChange={this.onChange}/>
+            <input type="email" id="email" required={true} value={email} onChange={this.onChange}
+            onBlur={(event) => { this.validate(event, 'Valid email is required') }} />
           </div>
           <div className="input-container">
             <label htmlFor="phone">Phone Number</label>

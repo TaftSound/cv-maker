@@ -8,6 +8,7 @@ class WorkExperience extends Component {
 
     this.renderFormState = this.renderFormState.bind(this)
     this.renderSavedState = this.renderSavedState.bind(this)
+    this.validate = this.validate.bind(this)
   }
 
   stateObject = {
@@ -22,13 +23,21 @@ class WorkExperience extends Component {
     description: '',
   }
 
+  validate (event, msg) {
+    if (!event.target.validity.valid) {
+      event.target.setCustomValidity(msg)
+      event.target.reportValidity()
+    }
+  }
+
   renderFormState (newThis, changeFunction) {
     return (
       <div>
         <form>
           <div className="input-container">
             <label htmlFor="title">Job Title*</label>
-            <input type="text" id="title" value={newThis.state.title} onChange={changeFunction}/>
+            <input type="text" id="title" required={true} value={newThis.state.title} onChange={changeFunction}
+            onBlur={(event) => { this.validate(event, 'Job title is required') }} />
           </div>
           <div className="input-container">
             <label htmlFor="city">City/Town </label>
@@ -36,7 +45,8 @@ class WorkExperience extends Component {
           </div>
           <div className="input-container full">
             <label htmlFor="employer">Employer*</label>
-            <input type="text" id="employer" value={newThis.state.employer} onChange={changeFunction}/>
+            <input type="text" id="employer" required={true} value={newThis.state.employer} onChange={changeFunction}
+            onBlur={(event) => { this.validate(event, 'Employer field is required') }} />
           </div>
           <DateRangeSelect
           startDateMonth={newThis.state.startDateMonth}
