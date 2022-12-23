@@ -118,21 +118,10 @@ class PersonalInfo extends Component {
   }
 
   render () {
-    if (this.state.isSaved) {
-      return (
-        <GenericSection content={this.renderSaved()}
-                        sectionTitle={'Personal Info'}
-                        isSaved={this.state.isSaved} 
-                        changeSaveState={this.changeSaveState} />
-      )
-    } else {
-      return (
-        <GenericSection content={this.renderForm()}
-                        sectionTitle={'Personal Info'}
-                        isSaved={this.state.isSaved} 
-                        changeSaveState={this.changeSaveState} />
-      )
-    }
+    return (
+      <GenericSection content={this.renderForm()}
+                      sectionTitle={'Personal Info'} />
+    )
   }
 }
 

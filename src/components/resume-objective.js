@@ -48,7 +48,7 @@ class ResumeObjective extends Component {
   renderSaved () {
     const { objective } = this.state
     return (
-        <p>{objective}</p>
+        <p className="objective">{objective}</p>
     )
   }
 
