@@ -1,5 +1,6 @@
 import { Component } from "react";
 import MultiSection from "./generic-multisection";
+import { ReactComponent as MouseLogo } from '../svg/mouse.svg';
 
 class Skills extends Component {
   constructor (props) {
@@ -54,6 +55,7 @@ class Skills extends Component {
     return (
       <MultiSection
       sectionTitle='Skills'
+      Icon={MouseLogo}
       stateObject={this.stateObject}
       renderFormState={this.renderFormState}
       renderSavedState={this.renderSavedState} />

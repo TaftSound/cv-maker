@@ -1,0 +1,43 @@
+.progress-logo {
+  fill: white;
+  height: 55%;
+  position: relative;
+  bottom: .5px;
+  left: .5px;
+}
+.section-logo {
+  position: relative;
+  top: .5px;
+  height: 25px;
+  fill: dimgray;
+}
+.save-button .section-logo {
+  top: -.5px;
+  left: -3px;
+  fill: white;
+}
+.delete-button .section-logo {
+  height: 27px;
+  top: 0px;
+}
+.new-item-button .section-logo {
+  fill: var(--main-color);
+}
+#next-button .section-logo {
+  fill: white;
+  height: 35px;
+  top: 2px;
+  margin-right: -15px;
+}
+#download-button .section-logo {
+  top: 0.5px;
+  left: -7.5px;
+  fill: white;
+  height: 35px;
+}
+#previous-button .section-logo {
+  fill: var(--medium-gray);
+  height: 27px;
+  top: 1px;
+  margin-left: -12px;
+}

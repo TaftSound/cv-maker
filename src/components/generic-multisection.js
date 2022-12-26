@@ -1,6 +1,7 @@
 import { Component } from "react";
 import GenericSection from "./generic-section";
 import uniqid from "uniqid";
+import { ReactComponent as AddLogo } from '../svg/plus-circle-outline.svg';
 
 class Item extends Component {
   constructor (props) {
@@ -223,19 +224,26 @@ class MultiSection extends Component {
 
   render () {
     const { items } = this.state
+    const { sectionTitle, Icon } = this.props
     if (this.state.isExpanded) {
       return (
         <div className="multi-section">
-          <h2 onClick={this.collapseExpand}>{this.props.sectionTitle}</h2>
+          <div className="section-header-div" onClick={this.collapseExpand}>
+            <Icon className="section-logo"/>
+            <h2>{sectionTitle}</h2>
+          </div>
           <div className="spacer"></div>
           <ul>{items}</ul>
-          <button className="new-item-button" onClick={this.addItem}><span>+</span> <p>add another</p></button>
+          <button className="new-item-button" onClick={this.addItem}><AddLogo className="section-logo"/> <p>add another</p></button>
         </div>
       )
     } else {
       return (
         <div className="section collapsed">
-          <h2 onClick={this.collapseExpand}>{this.props.sectionTitle}</h2>
+          <div className="section-header-div" onClick={this.collapseExpand}>
+            <Icon className="section-logo"/>
+            <h2>{sectionTitle}</h2>
+          </div>
         </div>
       )
     }

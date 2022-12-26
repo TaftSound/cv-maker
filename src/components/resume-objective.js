@@ -1,5 +1,6 @@
 import { Component } from "react";
 import GenericSection from "./generic-section";
+import { ReactComponent as AccountLogo } from '../svg/account-circle.svg';
 
 class ResumeObjective extends Component {
   constructor (props) {
@@ -70,6 +71,7 @@ class ResumeObjective extends Component {
       return (
         <GenericSection content={this.renderSaved()}
                         sectionTitle={'Resume Objective'}
+                        Icon={AccountLogo}
                         isSaved={this.state.isSaved} 
                         changeSaveState={this.changeSaveState} />
       )
@@ -77,6 +79,7 @@ class ResumeObjective extends Component {
       return (
         <GenericSection content={this.renderForm()}
                         sectionTitle={'Resume Objective'}
+                        Icon={AccountLogo}
                         isSaved={this.state.isSaved} 
                         changeSaveState={this.changeSaveState} />
       )

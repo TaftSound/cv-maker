@@ -1,5 +1,6 @@
 import { Component } from "react";
 import MultiSection from "./generic-multisection";
+import { ReactComponent as PaletteLogo } from '../svg/palette.svg';
 
 class Interests extends Component {
   constructor (props) {
@@ -48,6 +49,7 @@ class Interests extends Component {
     return (
       <MultiSection
       sectionTitle='Interests'
+      Icon={PaletteLogo}
       stateObject={this.stateObject}
       renderFormState={this.renderFormState}
       renderSavedState={this.renderSavedState} />

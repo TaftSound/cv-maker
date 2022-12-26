@@ -1,6 +1,7 @@
 import { Component } from "react";
 import MultiSection from "./generic-multisection";
 import DateRangeSelect from "./date-range-select";
+import { ReactComponent as BriefcaseLogo } from '../svg/briefcase-variant.svg';
 
 class WorkExperience extends Component {
   constructor (props) {
@@ -76,6 +77,7 @@ class WorkExperience extends Component {
     return (
       <MultiSection
       sectionTitle='Work Experience'
+      Icon={BriefcaseLogo}
       stateObject={this.stateObject}
       renderFormState={this.renderFormState}
       renderSavedState={this.renderSavedState} />

@@ -2,6 +2,9 @@
 import React, { Component } from "react";
 import "../styles/generic-section.css"
 import "../styles/input-styling.css"
+import { ReactComponent as DeleteLogo } from '../svg/delete-circle.svg';
+import { ReactComponent as EditLogo } from '../svg/pencil.svg';
+import { ReactComponent as SaveLogo } from '../svg/content-save.svg';
 
 
 // Make a generic section component
@@ -23,9 +26,16 @@ class SaveButton extends Component {
     const { isSaved, changeSaveState } = this.props
     if (!changeSaveState) { return }
     if (isSaved) {
-      return <button className="edit-button" onClick={changeSaveState}>Edit</button>
+      return (
+        <button className="edit-button" onClick={changeSaveState}>
+          <EditLogo className="section-logo"/>
+        </button>
+      )
     } else {
-      return <button className="save-button" onClick={changeSaveState}>Save</button>
+      return (
+        <button className="save-button" onClick={changeSaveState}>
+        <SaveLogo className="section-logo"/><p>Save</p></button>
+      )
     }
   }
 }
@@ -42,7 +52,9 @@ class DeleteButton extends Component {
       return
     } else {
       return (
-        <button className="delete-button" onClick={this.props.deleteFunction}>X</button>
+        <button className="delete-button" onClick={this.props.deleteFunction}>
+          <DeleteLogo className="section-logo"/>
+        </button>
       )
     }
   }
@@ -105,9 +117,18 @@ class GenericSection extends Component {
   }
 
   render () {
-    const { content, sectionTitle, isSaved, changeSaveState, removeSpacer } = this.props
+    const { content, sectionTitle, Icon, isSaved, changeSaveState, removeSpacer } = this.props
     let header = <div className="section-edit-div"></div>
-    if (sectionTitle) { header = <h2 onClick={this.collapseExpand}>{sectionTitle}</h2> }
+    if (Icon) {
+      header = (
+        <div className="section-header-div" onClick={this.collapseExpand}>
+          <Icon className="section-logo"/>
+          <h2>{sectionTitle}</h2>
+        </div>
+      )
+    } else if (sectionTitle) {
+      header = <h2>{sectionTitle}</h2>
+    }
 
     let sectionClassName = "section"
     if (isSaved) { sectionClassName = "section saved" }

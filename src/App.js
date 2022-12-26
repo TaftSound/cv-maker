@@ -1,4 +1,5 @@
 import './App.css';
+import './styles/logo-styling.css';
 import { Component, Fragment } from 'react';
 import PersonalInfo from './components/personal-info';
 import ResumeObjective from './components/resume-objective';
@@ -8,6 +9,12 @@ import Skills from './components/skills';
 import Interests from './components/interests';
 import References from './components/references';
 import { MyDocument } from './components/pdf-renderer';
+import { ReactComponent as AccountLogo } from './svg/account.svg';
+import { ReactComponent as DocumentLogo } from './svg/file-document.svg';
+import { ReactComponent as PencilLogo } from './svg/pencil.svg';
+import { ReactComponent as ChevronRight } from './svg/chevron-right.svg';
+import { ReactComponent as ChevronLeft } from './svg/chevron-left.svg';
+import { ReactComponent as DownloadLogo } from './svg/download-circle.svg';
 
 
 class App extends Component {
@@ -65,9 +72,18 @@ class App extends Component {
 
     return (
       <div className='progress-bar'>
-        <div className='progress-circle complete' onClick={() => { this.renderPageByIndex(0) } }></div>
-        <div className={'progress-circle' + stepTwo} onClick={() => { this.renderPageByIndex(1) } }></div>
-        <div className={'progress-circle' + stepThree} onClick={() => { this.renderPageByIndex(2) } }></div>
+        <div className='progress-circle complete' onClick={() => { this.renderPageByIndex(0) } }>
+          <AccountLogo className='progress-logo'/>
+          <p>Personal</p>
+        </div>
+        <div className={'progress-circle' + stepTwo} onClick={() => { this.renderPageByIndex(1) } }>
+          <DocumentLogo className='progress-logo'/>
+          <p>Experiences</p>
+        </div>
+        <div className={'progress-circle' + stepThree} onClick={() => { this.renderPageByIndex(2) } }>
+          <PencilLogo className='progress-logo'/>
+          <p>Template</p>
+        </div>
         <div className='progress-line'>
           {progressLineFill}
         </div>
@@ -90,9 +106,24 @@ class App extends Component {
   
   renderPage () {
     const { currentPage } = this.state
-    const nextButton = <button type='submit' id='next-button' onClick={this.renderNextPage}>Next Step</button>
-    const downloadButton = <button type='submit' id='next-button'>Download Resume</button>
-    const previousButton = <button type='submit' id='previous-button' onClick={this.renderPreviousPage}>Previous Step</button>
+    const nextButton = (
+      <button type='submit' id='next-button' onClick={this.renderNextPage}>
+        <p>Next Step</p>
+        <ChevronRight className='section-logo'/>
+      </button>
+    )
+    const downloadButton = (
+      <button type='submit' id='download-button'>
+      <DownloadLogo className='section-logo'/>
+        <p>Download Resume</p>
+      </button>
+    )
+    const previousButton = (
+      <button type='submit' id='previous-button' onClick={this.renderPreviousPage}>
+        <ChevronLeft className='section-logo'/>
+        <p>Previous Step</p>
+      </button>
+    )
 
     if (currentPage === 0) {
       return (
@@ -108,7 +139,7 @@ class App extends Component {
     if (currentPage === 1) {
       return (
         <Fragment>
-          {this.renderHeader('Experience')}
+          {this.renderHeader('My Experiences')}
           <div className='content-div'>
             <ResumeObjective />
             <WorkExperience />

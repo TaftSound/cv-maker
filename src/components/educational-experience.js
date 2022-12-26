@@ -1,6 +1,7 @@
 import { Component } from "react";
 import MultiSection from "./generic-multisection";
 import DateRangeSelect from "./date-range-select";
+import { ReactComponent as SchoolLogo } from '../svg/school.svg';
 
 class Education extends Component {
   constructor (props) {
@@ -71,6 +72,7 @@ class Education extends Component {
     return (
       <MultiSection
       sectionTitle='Education'
+      Icon={SchoolLogo}
       stateObject={this.stateObject}
       renderFormState={this.renderFormState}
       renderSavedState={this.renderSavedState} />

@@ -1,6 +1,7 @@
 import { Component } from "react";
 import MultiSection from "./generic-multisection";
 import GenericSection from "./generic-section";
+import { ReactComponent as ReferencesLogo } from '../svg/message-text.svg';
 
 class References extends Component {
   constructor (props) {
@@ -92,9 +93,10 @@ class References extends Component {
     if (this.state.includeReferences) {
       return (
         <div className="references">
-          <button className="toggle" onClick={this.toggleIncluded}>Remove</button>
+          <button className="toggle" onClick={this.toggleIncluded}>Upon Request</button>
           <MultiSection
           sectionTitle='References'
+          Icon={ReferencesLogo}
           stateObject={this.stateObject}
           renderFormState={this.renderFormState}
           renderSavedState={this.renderSavedState} />
