@@ -10,8 +10,16 @@ class References extends Component {
     this.renderSavedState = this.renderSavedState.bind(this)
     this.toggleIncluded = this.toggleIncluded.bind(this)
     this.validate = this.validate.bind(this)
+    this.updateLocalStorage = this.updateLocalStorage.bind(this)
 
-    this.state = { includeReferences: true }
+    const localStateData = JSON.parse(localStorage.getItem('includeReferences'))
+    if (!localStateData) {
+      this.state = {
+        includeReferences: localStateData
+      }
+    } else {
+      this.state = { includeReferences: true }
+    }
   }
 
   stateObject = {
@@ -22,12 +30,19 @@ class References extends Component {
     email: '',
   }
 
-  toggleIncluded () {
-    if (this.state.includeReferences) {
-      this.setState({ includeReferences: false })
+  updateLocalStorage () {
+    const { includeReferences } = this.state
+    localStorage.setItem('includeReferences', includeReferences)
+  }
+
+  async toggleIncluded () {
+    const { includeReferences } = this.state
+    if (includeReferences) {
+      await this.setState({ includeReferences: false })
     } else {
-      this.setState({ includeReferences: true })
+      await this.setState({ includeReferences: true })
     }
+    this.updateLocalStorage()
   }
 
   validate (event, msg) {
@@ -89,7 +104,7 @@ class References extends Component {
     return (
       <div className="references">
       <button className="toggle" onClick={this.toggleIncluded}>Include</button>
-        <GenericSection content={<h3>References available upon request</h3>} />
+        <GenericSection content={<h2>References available upon request</h2>} removeSpacer={true} />
       </div>
     )
   }

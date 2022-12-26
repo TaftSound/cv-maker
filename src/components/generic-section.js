@@ -105,18 +105,26 @@ class GenericSection extends Component {
   }
 
   render () {
-    const { content, sectionTitle, isSaved, changeSaveState } = this.props
+    const { content, sectionTitle, isSaved, changeSaveState, removeSpacer } = this.props
     let header = <div className="section-edit-div"></div>
     if (sectionTitle) { header = <h2 onClick={this.collapseExpand}>{sectionTitle}</h2> }
+
     let sectionClassName = "section"
     if (isSaved) { sectionClassName = "section saved" }
+
+    let spacer = <div className="spacer"></div>
+    if (removeSpacer) { 
+      spacer = ''
+      sectionClassName = "section collapsed"
+    }
+
     if (this.state.isExpanded) {
       return (
         <div className={sectionClassName}>
           <PositionButtons positionFunction={this.props.positionFunction}/>
           <DeleteButton deleteFunction={this.props.deleteFunction}/>
           {header}
-          <div className="spacer"></div>
+          {spacer}
           {content}
           <SaveButton isSaved={isSaved} changeSaveState={changeSaveState} />
         </div>

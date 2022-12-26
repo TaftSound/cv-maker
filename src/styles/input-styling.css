@@ -74,6 +74,10 @@ button {
   padding: 9px 25px;
   cursor: pointer;
 }
+.toggle {
+  position: relative;
+  z-index: 1;
+}
 .new-item-button {
   display: flex;
   justify-content: center;

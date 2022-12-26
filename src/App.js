@@ -7,6 +7,7 @@ import Education from './components/educational-experience';
 import Skills from './components/skills';
 import Interests from './components/interests';
 import References from './components/references';
+import { MyDocument } from './components/pdf-renderer';
 
 
 class App extends Component {
@@ -124,9 +125,9 @@ class App extends Component {
     if (currentPage === 2) {
       return (
         <Fragment>
-          {this.renderHeader('Unfinished Page')}
+          {this.renderHeader('Choose Style')}
           <div className='content-div'>
-            <h2>Unfinished Page</h2>
+            <MyDocument/>
             {downloadButton}
             {previousButton}
           </div>
