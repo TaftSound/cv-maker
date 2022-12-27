@@ -1,8 +1,17 @@
 import React from "react";
 import uniqid from "uniqid";
 
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, } from '@react-pdf/renderer';
 import { usePDF } from '@react-pdf/renderer';
+import { BriefcaseIcon, 
+         EducationIcon,
+         ReferencesIcon,
+         SkillsIcon,
+         PersonIcon,
+         AddressIcon,
+         PhoneIcon,
+         EmailIcon
+       } from "./pdf-icons";
 
 const styles = StyleSheet.create({
   iframe: {
@@ -13,6 +22,7 @@ const styles = StyleSheet.create({
   page: {
     flexDirection: 'row',
     fontFamily: 'Helvetica',
+    color: 'dimgray',
   },
   sectionOne: {
     paddingTop: '25px',
@@ -46,7 +56,7 @@ const styles = StyleSheet.create({
   nameHeader: {
     fontSize: '20px',
     fontFamily: 'Helvetica',
-    letterSpacing: '1px',
+    letterSpacing: '2px',
     padding: 0,
     margin: '15px 0px',
     marginTop: '20px',
@@ -59,14 +69,19 @@ const styles = StyleSheet.create({
     margin: '10 0',
   },
   smallHeader: {
-    fontSize: '11px',
+    fontSize: '12px',
     fontFamily: 'Helvetica-Bold',
     marginBottom: '5',
   },
   text: {
+    fontSize: '11px',
+    lineHeight: '1.3px',
+    margin: '0',
+  },
+  smallText: {
     fontSize: '10px',
     lineHeight: '1.5px',
-    margin: '0',
+    marginTop: '7px',
   },
 });
 
@@ -89,15 +104,34 @@ const DisplayPersonalDetails = () => {
   return (
       <View style={styles.personalSection}>
         <Text style={styles.mediumHeader}>PERSONAL</Text>
-        <Text style={styles.smallHeader}>Name</Text>
-        {name}
-        <Text style={styles.smallHeader}>Email</Text>
-        {email}
-        <Text style={styles.smallHeader}>Phone</Text>
-        {phone}
-        <Text style={styles.smallHeader}>Address</Text>
-        {address}
-        {city}
+        <View style={styles.twoColumnBox}>
+          {PersonIcon}
+          <View>
+            <Text style={styles.text}>Name</Text>
+            {name}
+          </View>
+        </View>
+        <View style={styles.twoColumnBox}>
+          {AddressIcon}
+          <View>
+            <Text style={styles.text}>Address</Text>
+            {address}
+          </View>
+        </View>
+        <View style={styles.twoColumnBox}>
+          {PhoneIcon}
+          <View>
+            <Text style={styles.text}>Phone</Text>
+            {phone}
+          </View>
+        </View>
+        <View style={styles.twoColumnBox}>
+          {EmailIcon}
+          <View>
+            <Text style={styles.text}>Email</Text>
+            {email}
+          </View>
+        </View>
       </View>
   )
 }
@@ -108,7 +142,7 @@ const DisplayPersonalInterests = () => {
   for (const item of items) {
     const key = uniqid()
     const interest = item.props.stateObject.interest
-    let interestView = <Text key={key} style={styles.text}>{interest}</Text>
+    let interestView = <Text key={key} style={styles.text}>•   {interest}</Text>
     itemArray.push(interestView)
   }
   return (
@@ -121,7 +155,7 @@ const DisplayPersonalInterests = () => {
 
 const DisplayObjective = () => {
   const objectiveData = JSON.parse(localStorage.getItem('resumeObjective'))
-  return <Text style={styles.text}>{objectiveData.objective}</Text>
+  return <Text style={styles.smallText}>{objectiveData.objective}</Text>
 }
 
 const CreateSpacer = () => {
@@ -143,7 +177,7 @@ const DisplayWorkExperience = () => {
         <View>
           <Text style={styles.smallHeader}>{title}</Text>
           <Text style={styles.text}>{employer}, {city}</Text>
-          <Text style={styles.text}>{description}</Text>
+          <Text style={styles.smallText}>{description}</Text>
         </View>
       </View>
       )
@@ -151,7 +185,10 @@ const DisplayWorkExperience = () => {
   }
   return (
     <View>
-      <Text style={styles.mediumHeader}>WORK EXPERIENCE</Text>
+      <View style={styles.twoColumnBox}>
+        {BriefcaseIcon}
+        <Text style={styles.mediumHeader}>WORK EXPERIENCE</Text>
+      </View>
       {itemArray}
     </View>
   )
@@ -179,7 +216,10 @@ const DisplayEducation = () => {
   }
   return (
     <View>
-      <Text style={styles.mediumHeader}>EDUCATION AND QUALIFICATIONS</Text>
+      <View style={styles.twoColumnBox}>
+        {EducationIcon}
+        <Text style={styles.mediumHeader}>EDUCATION AND QUALIFICATIONS</Text>
+      </View>
       {itemArray}
     </View>
   )
@@ -217,7 +257,10 @@ const DisplayReferences = () => {
   }
   return (
     <View>
-      <Text style={styles.mediumHeader}>REFERENCES</Text>
+      <View style={styles.twoColumnBox}>
+        {ReferencesIcon}
+        <Text style={styles.mediumHeader}>REFERENCES</Text>
+      </View>
       {itemArray}
     </View>
   )
@@ -244,7 +287,10 @@ const DisplaySkills = () => {
   }
   return (
     <View>
-      <Text style={styles.mediumHeader}>SKILLS</Text>
+      <View style={styles.twoColumnBox}>
+        {SkillsIcon}
+        <Text style={styles.mediumHeader}>SKILLS</Text>
+      </View>
       {itemArray}
     </View>
   )
@@ -252,7 +298,7 @@ const DisplaySkills = () => {
 
 const CreateDocumentData = () => (
     <Document >
-      <Page size="A4" style={styles.page} >
+      <Page size="A4" style={styles.page} dpi='80' >
         <View style={styles.sectionOne} >
           {DisplayPersonalDetails()}
           {DisplayPersonalInterests()}

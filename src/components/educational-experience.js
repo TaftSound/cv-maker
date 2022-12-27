@@ -17,9 +17,9 @@ class Education extends Component {
     degree: '',
     city: '',
     school: '',
-    startDateMonth: 'January',
+    startDateMonth: 'Jan',
     startDateYear: '2022',
-    endDateMonth: 'July',
+    endDateMonth: 'Jul',
     endDateYear: '2022',
   }
 

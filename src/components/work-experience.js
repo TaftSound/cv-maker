@@ -17,9 +17,9 @@ class WorkExperience extends Component {
     title: '',
     employer: '',
     city: '',
-    startDateMonth: 'January',
+    startDateMonth: 'Jan',
     startDateYear: '2022',
-    endDateMonth: 'July',
+    endDateMonth: 'Jul',
     endDateYear: '2022',
     description: '',
   }
