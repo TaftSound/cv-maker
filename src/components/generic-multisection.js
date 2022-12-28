@@ -132,6 +132,7 @@ class MultiSection extends Component {
               storageKey={startKey} />],
               isExpanded: true,
       }
+      localStorage.setItem(this.props.sectionTitle, JSON.stringify(this.state))
     }
   }
 

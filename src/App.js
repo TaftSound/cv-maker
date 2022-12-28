@@ -34,13 +34,16 @@ class App extends Component {
       const parsedData = JSON.parse(localData)
       const { currentPage } = parsedData
       this.state = {
-        currentPage: currentPage
+        currentPage: currentPage,
       }
     } else {
       this.state = {
         currentPage: 0,
       }
+      localStorage.setItem('firstLoad', JSON.stringify(true))
+      localStorage.setItem('currentPage', JSON.stringify(this.state))
     }
+    
   }
 
   updateLocaleStorage () {
@@ -168,6 +171,21 @@ class App extends Component {
   }
 
   render () {
+    let firstLoad = ''
+    const isFirstLoad = JSON.parse(localStorage.getItem('firstLoad'))
+    if (isFirstLoad) {
+      firstLoad = (
+      <div style={{display: 'none'}}>
+        <ResumeObjective />
+        <WorkExperience />
+        <Education />
+        <Skills />
+        <Interests />
+        <References />
+      </div>
+      )
+      localStorage.setItem('firstLoad', JSON.stringify(false))
+    }
     return (
 
       // When all sections have been saved,
@@ -183,6 +201,7 @@ class App extends Component {
       // add option to display all section info together as html
       
       <div className='App'>
+        {firstLoad}
         {this.renderPage()}
       </div>
     )

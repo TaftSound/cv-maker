@@ -38,6 +38,7 @@ class PersonalInfo extends Component {
         zip: '',
         city: '',
       }
+      localStorage.setItem('personalInfo', JSON.stringify(this.state))
     }
   }
 

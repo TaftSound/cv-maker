@@ -25,6 +25,7 @@ class ResumeObjective extends Component {
         isSaved: false,
         objective: '',
       }
+      localStorage.setItem('resumeObjective', JSON.stringify(this.state))
     }
   }
 

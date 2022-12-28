@@ -94,13 +94,14 @@ const DisplayName = () => {
 const DisplayPersonalDetails = () => {
   const personalInfoData = JSON.parse(localStorage.getItem('personalInfo'))
   let { firstName, lastName, email, phone, address, city, zip } = personalInfoData
-  const name = <Text style={styles.text}>{firstName} {lastName}</Text>
-  if (email) { email = <Text style={styles.text}>{email}</Text> }
-  if (phone) { phone = <Text style={styles.text}>{phone}</Text> }
-  if (address) { address = <Text style={styles.text}>{address}</Text> }
-  if (city && zip) { city = <Text style={styles.text}>{city}, {zip}</Text> }
-  else if (zip && !city) { city = <Text style={styles.text}>{zip}</Text> }
-  else if (city) { city = <Text style={styles.text}>{city}</Text> }
+  let nameText, emailText, phoneText, addressText, cityText
+  if (firstName) { nameText = <Text style={styles.text}>{firstName} {lastName}</Text> }
+  if (email) { emailText = <Text style={styles.text}>{email}</Text> }
+  if (phone) { phoneText = <Text style={styles.text}>{phone}</Text> }
+  if (address) { addressText = <Text style={styles.text}>{address}</Text> }
+  if (city && zip) { cityText = <Text style={styles.text}>{city}, {zip}</Text> }
+  else if (zip && !city) { cityText = <Text style={styles.text}>{zip}</Text> }
+  else if (city) { cityText = <Text style={styles.text}>{city}</Text> }
   return (
       <View style={styles.personalSection}>
         <Text style={styles.mediumHeader}>PERSONAL</Text>
@@ -108,28 +109,29 @@ const DisplayPersonalDetails = () => {
           {PersonIcon}
           <View>
             <Text style={styles.text}>Name</Text>
-            {name}
+            {nameText}
           </View>
         </View>
         <View style={styles.twoColumnBox}>
           {AddressIcon}
           <View>
             <Text style={styles.text}>Address</Text>
-            {address}
+            {addressText}
+            {cityText}
           </View>
         </View>
         <View style={styles.twoColumnBox}>
           {PhoneIcon}
           <View>
             <Text style={styles.text}>Phone</Text>
-            {phone}
+            {phoneText}
           </View>
         </View>
         <View style={styles.twoColumnBox}>
           {EmailIcon}
           <View>
             <Text style={styles.text}>Email</Text>
-            {email}
+            {emailText}
           </View>
         </View>
       </View>
