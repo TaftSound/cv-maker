@@ -1,5 +1,5 @@
 import React from "react";
-import { Svg, Path, G, Circle } from '@react-pdf/renderer';
+import { Svg, Path, G, Circle, View } from '@react-pdf/renderer';
 
 
 const briefcasePath = "M10 16V15H3L3 19C3 20.11 3.89 21 5 21H19C20.11 21 21 20.11 21 19V15H14V16H10M20 7H16V5L14 3H10L8 5V7H4C2.9 7 2 7.9 2 9V12C2 13.11 2.89 14 4 14H10V12H14V14H20C21.1 14 22 13.1 22 12V9C22 7.9 21.1 7 20 7M14 7H10V5H14V7Z"
@@ -14,31 +14,35 @@ const emailPath = "M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 
 
 const CreateIcon = (pathString) => {
   return (
-    <Svg viewBox="-10 -10 70 70" height='50px' width='45px' style={{ marginLeft: '-7x', marginRight: '-8px' }}>
-      <G>
-        <Circle
-          cx="12"
-          cy="13"
-          r="18"
-          stroke="gray"
-        />
-        <Path 
-          d={pathString}
-          fill="dimgray"
-        />
-      </G>
-    </Svg>
+    <View style={{ marginLeft: '-7px', marginRight: '-8px', marginBottom: '-20px', width: '45px' }}>
+      <Svg viewBox="-10 -10 70 70" height='50px' width='45px'>
+        <G>
+          <Circle
+            cx="12"
+            cy="13"
+            r="18"
+            stroke="gray"
+          />
+          <Path
+            d={pathString}
+            fill="dimgray"
+          />
+        </G>
+      </Svg>
+    </View>
   )
 }
 
 const CreateSmallIcon = (pathString) => {
   return (
-    <Svg viewBox="0 1 60 60" height='40px' width='40px' style={{ marginLeft: '-3px', marginRight: '-15px'}}>
-        <Path 
-          d={pathString}
-          fill="white"
-        />
-    </Svg>
+    <View style={{ marginLeft: '-7px', marginRight: '-10px', width: '40px' }}>
+      <Svg viewBox="5 0 40 40" height='25px' width='40px'>
+          <Path
+            d={pathString}
+            fill="white"
+          />
+      </Svg>
+    </View>
   )
 }
 

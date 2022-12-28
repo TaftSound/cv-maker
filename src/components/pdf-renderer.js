@@ -41,10 +41,16 @@ const styles = StyleSheet.create({
   twoColumnBox: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginBottom: '7.5px'
   },
   leftBox: {
     marginRight: '15px',
     width: '25%',
+  },
+  rightBox: {
+    width: '90%'
   },
   spacer: {
     backgroundColor: 'rgb(0, 0, 0, 0.2)',
@@ -58,7 +64,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Helvetica',
     letterSpacing: '2px',
     padding: 0,
-    margin: '15px 0px',
+    marginBottom: '-5px',
     marginTop: '20px',
   },
   mediumHeader: {
@@ -94,42 +100,50 @@ const DisplayName = () => {
 const DisplayPersonalDetails = () => {
   const personalInfoData = JSON.parse(localStorage.getItem('personalInfo'))
   let { firstName, lastName, email, phone, address, city, zip } = personalInfoData
-  let nameText, emailText, phoneText, addressText, cityText
+  let nameText, emailText, phoneView, addressView, cityText
   if (firstName) { nameText = <Text style={styles.text}>{firstName} {lastName}</Text> }
   if (email) { emailText = <Text style={styles.text}>{email}</Text> }
-  if (phone) { phoneText = <Text style={styles.text}>{phone}</Text> }
-  if (address) { addressText = <Text style={styles.text}>{address}</Text> }
-  if (city && zip) { cityText = <Text style={styles.text}>{city}, {zip}</Text> }
-  else if (zip && !city) { cityText = <Text style={styles.text}>{zip}</Text> }
-  else if (city) { cityText = <Text style={styles.text}>{city}</Text> }
+  if (phone) {
+    phoneView = (
+      <View style={styles.twoColumnBox}>
+        {PhoneIcon}
+        <View style={styles.rightBox}>
+          <Text style={styles.text}>Phone</Text>
+          <Text style={styles.text}>{phone}</Text>
+        </View>
+      </View>
+    )
+  }
+  if (address) {
+    if (city && zip) { cityText = <Text style={styles.text}>{city}, {zip}</Text> }
+    else if (zip && !city) { cityText = <Text style={styles.text}>{zip}</Text> }
+    else if (city) { cityText = <Text style={styles.text}>{city}</Text> }
+    addressView = (
+      <View style={styles.twoColumnBox}>
+        {AddressIcon}
+        <View style={styles.rightBox}>
+          <Text style={styles.text}>Address</Text>
+          <Text style={styles.text}>{address}</Text>
+          {cityText}
+        </View>
+      </View>
+    )
+  }
   return (
       <View style={styles.personalSection}>
         <Text style={styles.mediumHeader}>PERSONAL</Text>
         <View style={styles.twoColumnBox}>
           {PersonIcon}
-          <View>
+          <View style={styles.rightBox}>
             <Text style={styles.text}>Name</Text>
             {nameText}
           </View>
         </View>
-        <View style={styles.twoColumnBox}>
-          {AddressIcon}
-          <View>
-            <Text style={styles.text}>Address</Text>
-            {addressText}
-            {cityText}
-          </View>
-        </View>
-        <View style={styles.twoColumnBox}>
-          {PhoneIcon}
-          <View>
-            <Text style={styles.text}>Phone</Text>
-            {phoneText}
-          </View>
-        </View>
+        {addressView}
+        {phoneView}
         <View style={styles.twoColumnBox}>
           {EmailIcon}
-          <View>
+          <View style={styles.rightBox}>
             <Text style={styles.text}>Email</Text>
             {emailText}
           </View>
@@ -141,18 +155,20 @@ const DisplayPersonalInterests = () => {
   const interestsData = JSON.parse(localStorage.getItem('Interests'))
   const { items } = interestsData
   const itemArray = []
-  for (const item of items) {
-    const key = uniqid()
-    const interest = item.props.stateObject.interest
-    let interestView = <Text key={key} style={styles.text}>•   {interest}</Text>
-    itemArray.push(interestView)
+  if (items[0].props.stateObject.interest) {
+    for (const item of items) {
+      const key = uniqid()
+      const interest = item.props.stateObject.interest
+      let interestView = <Text key={key} style={styles.text}>•   {interest}</Text>
+      itemArray.push(interestView)
+    }
+    return (
+      <View style={styles.personalSection}>
+        <Text style={styles.mediumHeader}>INTERESTS</Text>
+        {itemArray}
+      </View>
+    )
   }
-  return (
-    <View style={styles.personalSection}>
-      <Text style={styles.mediumHeader}>INTERESTS</Text>
-      {itemArray}
-    </View>
-  )
 }
 
 const DisplayObjective = () => {
@@ -170,7 +186,8 @@ const DisplayWorkExperience = () => {
   const itemArray = []
   for (const item of items) {
     const key = uniqid()
-    const { city, employer, title, startDateMonth, startDateYear, endDateMonth, endDateYear, description } = item.props.stateObject
+    let { city, employer, title, startDateMonth, startDateYear, endDateMonth, endDateYear, description } = item.props.stateObject
+    if (employer) { employer = employer + ', ' }
     let workView = (
       <View key={key} style={styles.twoColumnBox}>
         <View style={styles.leftBox}>
@@ -178,7 +195,7 @@ const DisplayWorkExperience = () => {
         </View>
         <View>
           <Text style={styles.smallHeader}>{title}</Text>
-          <Text style={styles.text}>{employer}, {city}</Text>
+          <Text style={styles.text}>{employer}{city}</Text>
           <Text style={styles.smallText}>{description}</Text>
         </View>
       </View>
@@ -202,7 +219,8 @@ const DisplayEducation = () => {
   const itemArray = []
   for (const item of items) {
     const key = uniqid()
-    const { city, degree, school, startDateMonth, startDateYear, endDateMonth, endDateYear } = item.props.stateObject
+    let { city, degree, school, startDateMonth, startDateYear, endDateMonth, endDateYear } = item.props.stateObject
+    if (school) { school = school + ', ' }
     let educationView = (
       <View key={key} style={styles.twoColumnBox}>
         <View style={styles.leftBox}>
@@ -210,7 +228,7 @@ const DisplayEducation = () => {
         </View>
         <View>
           <Text style={styles.smallHeader}>{degree}</Text>
-          <Text style={styles.text}>{school}, {city}</Text>
+          <Text style={styles.text}>{school}{city}</Text>
         </View>
       </View>
       )
@@ -271,31 +289,33 @@ const DisplayReferences = () => {
 const DisplaySkills = () => {
   const skillsData = JSON.parse(localStorage.getItem('Skills'))
   const { items } = skillsData
-  const itemArray = []
-  for (const item of items) {
-    const key = uniqid()
-    const { skill, yearsExperience } = item.props.stateObject
-    let skillsView = (
-      <View key={key} style={styles.twoColumnBox}>
-        <View style={styles.leftBox}>
-          <Text style={styles.text}>{skill} - {yearsExperience}</Text>
+  if (items[0].props.stateObject.skill) {
+    const itemArray = []
+    for (const item of items) {
+      const key = uniqid()
+      const { skill, yearsExperience } = item.props.stateObject
+      let skillsView = (
+        <View key={key} style={styles.twoColumnBox}>
+          <View style={styles.leftBox}>
+          <Text style={styles.text}>{skill}</Text>
+          </View>
+          <View>
+            <Text style={styles.text}>{yearsExperience}</Text>
+          </View>
         </View>
-        <View>
-          <Text style={styles.text}></Text>
+        )
+      itemArray.push(skillsView)
+    }
+    return (
+      <View>
+        <View style={styles.twoColumnBox}>
+          {SkillsIcon}
+          <Text style={styles.mediumHeader}>SKILLS</Text>
         </View>
+        {itemArray}
       </View>
-      )
-    itemArray.push(skillsView)
-  }
-  return (
-    <View>
-      <View style={styles.twoColumnBox}>
-        {SkillsIcon}
-        <Text style={styles.mediumHeader}>SKILLS</Text>
-      </View>
-      {itemArray}
-    </View>
   )
+  }
 }
 
 const CreateDocumentData = () => (
