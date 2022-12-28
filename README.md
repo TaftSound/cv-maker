@@ -6,3 +6,4 @@ This is a clone of the cvmaker.com resume builder
 
 pdf display and download implemented via react-pdf/renderer
 
+data storage via localStorage
