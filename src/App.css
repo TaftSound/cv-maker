@@ -77,11 +77,11 @@
 }
 .header-div h1 {
   position: absolute;
-  left: calc(50% - 150px);
+  left: calc(50% - 200px);
   bottom: 325px;
   color: white;
   font-size: 40px;
-  width: 300px;
+  width: 400px;
   text-align: center;
 }
 .progress-bar {

@@ -319,16 +319,16 @@ const CreateDocumentData = () => (
     </Document>
 )
 
-const CreatePdf = () => {
+const DisplayPdf = () => {
   const [instance] = usePDF({ document: CreateDocumentData() });
 
   return (
     <div style={{ 
         // height: '45vh',
         // width: '30vh',
-        height: '73.8vh',
+        height: '74vh',
         width: "52.2vh",
-        borderRadius: '5px',
+        borderRadius: '1vh',
         overflow: 'hidden',
         position: 'relative',
         alignSelf: 'center', }}>
@@ -336,15 +336,15 @@ const CreatePdf = () => {
         src={`${instance.url}#toolbar=0`}
         // height='103%'
         height='101.4%' 
-        width='101.4%' 
-        objectfit="contain"
+        width='101.8%' 
+        objectfit="cover"
         title="pdfFile"
         frameBorder="0"
         style={{
           margin: '0px',
           position: "absolute",
-          top: '-2px',
-          left: '-3px',
+          top: '-.3%',
+          left: '-.8%',
           overflow: "hidden",
           backgroundColor: "transparent"
         }}
@@ -354,7 +354,21 @@ const CreatePdf = () => {
   )
 }
 
+export const DownloadPdf = () => {
+  const [instance] = usePDF({ document: CreateDocumentData() });
+
+  if (instance.loading) return <p>Loading ...</p>;
+
+  if (instance.error) return <p>Something went wrong: {instance.error}</p>;
+
+  return (
+    <a href={instance.url} download="resume.pdf" style={{color: 'white', textDecoration: 'none'}}>
+      Download Resume
+    </a>
+  );
+}
+
 // Create Document Component
 export const MyDocument = () => {
-  return CreatePdf()
+  return DisplayPdf()
 }

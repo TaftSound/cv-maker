@@ -8,7 +8,7 @@ import Education from './components/educational-experience';
 import Skills from './components/skills';
 import Interests from './components/interests';
 import References from './components/references';
-import { MyDocument } from './components/pdf-renderer';
+import { MyDocument, DownloadPdf } from './components/pdf-renderer';
 import { ReactComponent as AccountLogo } from './svg/account.svg';
 import { ReactComponent as DocumentLogo } from './svg/file-document.svg';
 import { ReactComponent as PencilLogo } from './svg/pencil.svg';
@@ -113,9 +113,9 @@ class App extends Component {
       </button>
     )
     const downloadButton = (
-      <button type='submit' id='download-button'>
-      <DownloadLogo className='section-logo'/>
-        <p>Download Resume</p>
+      <button type='submit' id='download-button' >
+        <DownloadLogo className='section-logo'/>
+        <DownloadPdf />
       </button>
     )
     const previousButton = (
@@ -156,7 +156,7 @@ class App extends Component {
     if (currentPage === 2) {
       return (
         <Fragment>
-          {this.renderHeader('Choose Style')}
+          {this.renderHeader('Download Resume')}
           <div className='content-div'>
             <MyDocument/>
             {downloadButton}
