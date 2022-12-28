@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/cv-maker/static/css/main.4b7a3bba.css",
-    "main.js": "/cv-maker/static/js/main.b72e0ec7.js",
+    "main.js": "/cv-maker/static/js/main.4840b445.js",
     "static/media/palette.svg": "/cv-maker/static/media/palette.ca2bf815fdf632849c998a590a4926e6.svg",
     "index.html": "/cv-maker/index.html",
     "static/media/account-circle.svg": "/cv-maker/static/media/account-circle.dda40cce0d021517f9667c96637e7f66.svg",
@@ -19,10 +19,10 @@
     "static/media/chevron-left.svg": "/cv-maker/static/media/chevron-left.3490f5eea08639f690a34846479b9689.svg",
     "static/media/chevron-right.svg": "/cv-maker/static/media/chevron-right.cb3e629604702ef8bc6635945ad81bd6.svg",
     "main.4b7a3bba.css.map": "/cv-maker/static/css/main.4b7a3bba.css.map",
-    "main.b72e0ec7.js.map": "/cv-maker/static/js/main.b72e0ec7.js.map"
+    "main.4840b445.js.map": "/cv-maker/static/js/main.4840b445.js.map"
   },
   "entrypoints": [
     "static/css/main.4b7a3bba.css",
-    "static/js/main.b72e0ec7.js"
+    "static/js/main.4840b445.js"
   ]
 }
